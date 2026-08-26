@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Twitter-style tweet detail page built with HTML, CSS, and vanilla JavaScript."
+    >
+
+    <title>Tweet Detail</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <nav class="top-nav" aria-label="Primary navigation">
+
+            <a href="#" class="brand" aria-label="Home">
+                X
+            </a>
+
+            <form class="search-form" role="search">
+                <label for="search-input" class="sr-only">
+                    Search
+                </label>
+
+                <input
+                    id="search-input"
+                    name="search"
+                    type="search"
+                    placeholder="Search"
+                    autocomplete="off"
+                >
+
+                <button type="submit">
+                    Search
+                </button>
+            </form>
+
+            <button
+                type="button"
+                class="profile-button"
+                aria-label="Open profile menu"
+            >
+                Profile
+            </button>
+
+        </nav>
+    </header>
+
+
+    <!-- Page Layout -->
+    <div class="page-layout">
+
+
+        <!-- Left Sidebar -->
+        <aside
+            class="left-sidebar"
+            aria-label="Sidebar navigation"
+        >
+
+            <nav class="sidebar-nav">
+
+                <a href="#" class="nav-link">
+                    Home
+                </a>
+
+                <a href="#" class="nav-link">
+                    Explore
+                </a>
+
+                <a href="#" class="nav-link">
+                    Notifications
+                </a>
+
+                <a href="#" class="nav-link">
+                    Messages
+                </a>
+
+                <a href="#" class="nav-link">
+                    Bookmarks
+                </a>
+
+                <a href="#" class="nav-link">
+                    Profile
+                </a>
+
+            </nav>
+
+            <button
+                type="button"
+                class="compose-button"
+            >
+                Post
+            </button>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <section
+                class="tweet-page"
+                aria-labelledby="page-title"
+            >
+
+                <!-- Page Heading -->
+                <div class="page-heading">
+
+                    <a
+                        href="#"
+                        class="back-link"
+                        aria-label="Go back"
+                    >
+                        ←
+                    </a>
+
+                    <h1 id="page-title">
+                        Post
+                    </h1>
+
+                </div>
+
+
+                <!-- Tweet -->
+                <article
+                    class="tweet-detail"
+                    data-post-id="1"
+                >
+
+                    <!-- Tweet Header -->
+                    <header class="tweet-header">
+
+                        <div class="author-info">
+
+                            <a
+                                href="#"
+                                class="author-avatar"
+                                aria-label="Open user profile"
+                            >
+                                <img
+                                    src="assets/images/profile-placeholder.png"
+                                    alt="Profile picture"
+                                >
+                            </a>
+
+
+                            <div class="author-details">
+
+                                <a
+                                    href="#"
+                                    class="author-name"
+                                >
+                                    Koushik Maya
+                                </a>
+
+                                <span class="author-handle">
+                                    @koushikmaya
+                                </span>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="tweet-menu-button"
+                                aria-label="More options"
+                            >
+                                ⋯
+                            </button>
+
+                        </div>
+
+                    </header>
+
+
+                    <!-- Tweet Body -->
+                    <div class="tweet-body">
+
+                        <p class="tweet-text">
+                            Building a Twitter-style tweet detail page
+                            with semantic HTML, responsive CSS,
+                            and vanilla JavaScript.
+                        </p>
+
+
+                        <!-- Tweet Image -->
+                        <div
+                            class="tweet-media"
+                            aria-label="Post media"
+                        >
+
+                            <img
+                                src="assets/images/tweet-placeholder.jpg"
+                                alt="Tweet media"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+
+                        <!-- Tweet Metadata -->
+                        <footer class="tweet-meta">
+
+                            <time
+                                datetime="2026-08-26T17:00:00+05:30"
+                            >
+                                5:00 PM · Aug 26, 2026
+                            </time>
+
+                            <span aria-hidden="true">
+                                ·
+                            </span>
+
+                            <span>
+                                Web
+                            </span>
+
+                        </footer>
+
+                    </div>
+
+
+                    <!-- Tweet Statistics -->
+                    <div
+                        class="tweet-stats"
+                        aria-label="Post statistics"
+                    >
+
+                        <span>
+                            <strong>12</strong>
+                            Replies
+                        </span>
+
+                        <span>
+                            <strong>148</strong>
+                            Likes
+                        </span>
+
+                        <span>
+                            <strong>27</strong>
+                            Bookmarks
+                        </span>
+
+                    </div>
+
+
+                    <!-- Tweet Actions -->
+                    <div
+                        class="tweet-actions"
+                        aria-label="Post actions"
+                    >
+
+                        <button
+                            type="button"
+                            class="action-button reply-button"
+                        >
+                            Reply
+                        </button>
+
+                        <button
+                            type="button"
+                            class="action-button repost-button"
+                        >
+                            Repost
+                        </button>
+
+                        <button
+                            type="button"
+                            class="action-button like-button"
+                            data-action="like"
+                            aria-pressed="false"
+                        >
+                            Like
+                        </button>
+
+                        <button
+                            type="button"
+                            class="action-button bookmark-button"
+                        >
+                            Bookmark
+                        </button>
+
+                        <button
+                            type="button"
+                            class="action-button share-button"
+                        >
+                            Share
+                        </button>
+
+                    </div>
+
+
+                    <!-- Reply Composer -->
+                    <section
+                        class="reply-composer"
+                        aria-labelledby="reply-title"
+                    >
+
+                        <h2
+                            id="reply-title"
+                            class="sr-only"
+                        >
+                            Write a reply
+                        </h2>
+
+
+                        <div class="reply-composer-inner">
+
+                            <div
+                                class="composer-avatar"
+                                aria-hidden="true"
+                            >
+                                <img
+                                    src="assets/images/profile-placeholder.png"
+                                    alt=""
+                                >
+                            </div>
+
+
+                            <form class="reply-form">
+
+                                <label
+                                    for="reply-input"
+                                    class="sr-only"
+                                >
+                                    Post your reply
+                                </label>
+
+                                <textarea
+                                    id="reply-input"
+                                    name="reply"
+                                    rows="3"
+                                    placeholder="Post your reply"
+                                ></textarea>
+
+
+                                <div class="composer-footer">
+
+                                    <span class="character-count">
+                                        0 / 280
+                                    </span>
+
+                                    <button
+                                        type="submit"
+                                        class="reply-submit-button"
+                                    >
+                                        Reply
+                                    </button>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- Replies -->
+                    <section
+                        class="replies-section"
+                        aria-labelledby="replies-title"
+                    >
+
+                        <div class="section-heading">
+
+                            <h2 id="replies-title">
+                                Replies
+                            </h2>
+
+                        </div>
+
+
+                        <div class="replies-list">
+
+                            <!-- Reply -->
+                            <article class="reply-item">
+
+                                <div class="reply-avatar">
+
+                                    <img
+                                        src="assets/images/profile-placeholder.png"
+                                        alt="Profile picture"
+                                        loading="lazy"
+                                    >
+
+                                </div>
+
+
+                                <div class="reply-content">
+
+                                    <header class="reply-header">
+
+                                        <a
+                                            href="#"
+                                            class="author-name"
+                                        >
+                                            Alex Developer
+                                        </a>
+
+                                        <span class="author-handle">
+                                            @alexdev
+                                        </span>
+
+                                        <span aria-hidden="true">
+                                            ·
+                                        </span>
+
+                                        <time
+                                            datetime="2026-08-26T17:15:00+05:30"
+                                        >
+                                            15m
+                                        </time>
+
+                                    </header>
+
+
+                                    <p class="reply-text">
+                                        This structure will make the
+                                        JavaScript features much easier
+                                        to organize.
+                                    </p>
+
+
+                                    <div
+                                        class="reply-actions"
+                                        aria-label="Reply actions"
+                                    >
+
+                                        <button type="button">
+                                            Reply
+                                        </button>
+
+                                        <button type="button">
+                                            Repost
+                                        </button>
+
+                                        <button type="button">
+                                            Like
+                                        </button>
+
+                                        <button type="button">
+                                            Share
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+                        </div>
+
+                    </section>
+
+                </article>
+
+            </section>
+
+        </main>
+
+
+        <!-- Right Sidebar -->
+        <aside
+            class="right-sidebar"
+            aria-label="Additional content"
+        >
+
+            <!-- Relevant People -->
+            <section class="sidebar-card">
+
+                <h2>
+                    Relevant people
+                </h2>
+
+
+                <article class="person-card">
+
+                    <img
+                        src="assets/images/profile-placeholder.png"
+                        alt="Profile picture"
+                        loading="lazy"
+                    >
+
+
+                    <div class="person-info">
+
+                        <a
+                            href="#"
+                            class="author-name"
+                        >
+                            Alex Developer
+                        </a>
+
+                        <span class="author-handle">
+                            @alexdev
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="follow-button"
+                    >
+                        Follow
+                    </button>
+
+                </article>
+
+            </section>
+
+
+            <!-- Trending -->
+            <section class="sidebar-card">
+
+                <h2>
+                    What's happening
+                </h2>
+
+
+                <a
+                    href="#"
+                    class="trend-item"
+                >
+
+                    <span class="trend-category">
+                        Technology · Trending
+                    </span>
+
+                    <strong>
+                        #WebDevelopment
+                    </strong>
+
+                    <span class="trend-count">
+                        12.4K posts
+                    </span>
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="trend-item"
+                >
+
+                    <span class="trend-category">
+                        Trending in India
+                    </span>
+
+                    <strong>
+                        JavaScript
+                    </strong>
+
+                    <span class="trend-count">
+                        8.1K posts
+                    </span>
+
+                </a>
+
+            </section>
+
+        </aside>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+
+        <nav aria-label="Footer navigation">
+
+            <a href="#">
+                About
+            </a>
+
+            <a href="#">
+                Terms
+            </a>
+
+            <a href="#">
+                Privacy
+            </a>
+
+            <a href="#">
+                Help
+            </a>
+
+        </nav>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+    <script
+        src="javascript/app.js"
+        defer
+    ></script>
+
+</body>
+</html>
