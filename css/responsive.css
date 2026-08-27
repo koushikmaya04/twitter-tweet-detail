@@ -4,18 +4,59 @@
 
 @media (min-width: 768px) {
 
+    /* ====================================
+       Header
+       ==================================== */
+
     .top-nav {
         padding: 12px 24px;
+        gap: 16px;
     }
 
+
+    /* ====================================
+       Page Layout
+       ==================================== */
+
     .page-layout {
-        grid-template-columns: 200px minmax(0, 1fr) 260px;
+        width: min(100%, 960px);
+        display: grid;
+        grid-template-columns: 200px minmax(0, 1fr);
         gap: 20px;
     }
 
-    .tweet-page {
+
+    /* ====================================
+       Left Sidebar
+       ==================================== */
+
+    .left-sidebar {
+        position: sticky;
+        top: 64px;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding: 20px 0;
+    }
+
+
+    /* ====================================
+       Main Content
+       ==================================== */
+
+    .tweet-page,
+    .feed-section {
         max-width: 650px;
-        margin: 0 auto;
+    }
+
+
+    /* ====================================
+       Tweet
+       ==================================== */
+
+    .tweet-header {
+        padding: 20px;
     }
 
     .tweet-body {
@@ -27,20 +68,49 @@
     }
 
     .tweet-actions {
+        gap: 8px;
         padding: 12px 20px;
     }
+
+
+    /* ====================================
+       Reply Composer
+       ==================================== */
 
     .reply-composer {
         padding: 20px;
     }
 
+
+    /* ====================================
+       Replies
+       ==================================== */
+
     .reply-item {
         padding: 20px;
     }
 
+
+    /* ====================================
+       Right Sidebar
+       ==================================== */
+
     .right-sidebar {
-        display: flex;
+        display: none;
     }
+
+
+    /* ====================================
+       Notifications
+       ==================================== */
+
+    .notification-region {
+        right: 24px;
+        bottom: 24px;
+        left: auto;
+        width: 360px;
+    }
+
 }
 
 
@@ -50,14 +120,30 @@
 
 @media (min-width: 1024px) {
 
+    /* ====================================
+       Page Layout
+       ==================================== */
+
     .page-layout {
+        width: min(1200px, 100%);
         grid-template-columns: 240px minmax(0, 1fr) 300px;
         gap: 24px;
     }
 
-    .tweet-page {
+
+    /* ====================================
+       Main Content
+       ==================================== */
+
+    .tweet-page,
+    .feed-section {
         max-width: 680px;
     }
+
+
+    /* ====================================
+       Tweet
+       ==================================== */
 
     .tweet-header {
         padding: 20px;
@@ -71,6 +157,11 @@
         font-size: 1.25rem;
     }
 
+
+    /* ====================================
+       Tweet Actions
+       ==================================== */
+
     .tweet-actions {
         gap: 12px;
         padding: 12px 20px;
@@ -81,9 +172,30 @@
         min-height: 44px;
     }
 
+
+    /* ====================================
+       Replies
+       ==================================== */
+
     .reply-actions {
         gap: 12px;
     }
+
+
+    /* ====================================
+       Right Sidebar
+       ==================================== */
+
+    .right-sidebar {
+        position: sticky;
+        top: 64px;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 0;
+    }
+
 }
 
 
@@ -94,16 +206,42 @@
 @media (min-width: 1200px) {
 
     .page-layout {
+        width: 1200px;
         grid-template-columns: 240px minmax(600px, 680px) 300px;
         justify-content: center;
     }
 
-    .tweet-page {
-        max-width: 680px;
-    }
+
+    /* ====================================
+       Sidebars
+       ==================================== */
 
     .left-sidebar,
     .right-sidebar {
         padding-top: 24px;
     }
+
+
+    /* ====================================
+       Main Content
+       ==================================== */
+
+    .tweet-page,
+    .feed-section {
+        max-width: 680px;
+    }
+
+}
+
+
+/* ========================================
+   Reduced Motion Accessibility
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
 }
