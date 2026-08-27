@@ -14,6 +14,7 @@ import {
 import {
     loadImagesWithLimit
 } from "./images/image-queue.js";
+import "./feed/infinite-scroll.js";
 // ================================
 // Debounce search
 // ================================
