@@ -1,4 +1,5 @@
 import debounce from "./search/debounce.js";
+import "./likes/likes.js";
 
 const searchInput = document.querySelector("#search-input");
 
