@@ -5,8 +5,15 @@ import {
     Comment,
     Retweet
 } from "./models/post.js";
-
-
+import {
+    filterByFollowing,
+    sortByRecency,
+    dedupe,
+    pipe
+} from "./feed/pipeline.js";
+// ================================
+// Debounce search
+// ================================
 
 const searchInput = document.querySelector("#search-input");
 
@@ -66,3 +73,69 @@ console.log("Retweet:", retweet);
 console.log("Retweet type:", retweet.type);
 console.log("Retweet content:", retweet.content);
 console.log("Retweet likes:", retweet.likes);
+
+// ================================
+// feed/pipeline
+// ================================
+const posts = [
+    {
+        id: 1,
+        author: "Koushik Maya",
+        createdAt: "2026-08-27T10:00:00",
+        content: "Post 1"
+    },
+    {
+        id: 2,
+        author: "Alex Developer",
+        createdAt: "2026-08-27T11:00:00",
+        content: "Post 2"
+    },
+    {
+        id: 2,
+        author: "Alex Developer",
+        createdAt: "2026-08-27T11:00:00",
+        content: "Duplicate Post 2"
+    }
+];
+
+const following = [
+    "Koushik Maya",
+    "Alex Developer"
+];
+
+const filterFollowing = (posts) =>
+    filterByFollowing(posts, following);
+
+const feedPipeline = pipe(
+    filterFollowing,
+    sortByRecency,
+    dedupe
+);
+
+const feed = feedPipeline(posts);
+
+console.log("Filtered feed:", feed);
+
+
+console.log(
+    "Filter:",
+    filterByFollowing(posts, following)
+);
+
+console.log(
+    "Sort:",
+    sortByRecency(posts)
+);
+
+console.log(
+    "Dedupe:",
+    dedupe(posts)
+);
+
+console.log(
+    "Pipeline:",
+    feed
+);
+console.log("Original posts:", posts);
+console.log("Pipeline result:", feed);
+console.log("Same array:", posts === feed);
