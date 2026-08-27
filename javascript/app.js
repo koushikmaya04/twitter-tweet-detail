@@ -15,6 +15,7 @@ import {
     loadImagesWithLimit
 } from "./images/image-queue.js";
 import "./feed/infinite-scroll.js";
+import "./notifications/event-emitter.js";
 // ================================
 // Debounce search
 // ================================
@@ -34,7 +35,7 @@ searchInput.addEventListener("input", (event) => {
 // ================================
 // Post Model
 // ================================
-
+  
 const tweet = new Tweet(
     1,
     "Koushik Maya",
@@ -152,7 +153,7 @@ const testImages = Array.from(
     { length: 6 },
     (_, index) => {
         const image = document.createElement("img");
-
+        
         image.className = "lazy-image";
 
         image.dataset.src =
