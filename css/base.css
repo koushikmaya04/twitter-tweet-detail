@@ -1,0 +1,52 @@
+/* Global box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Root document */
+html {
+    font-size: 16px;
+}
+
+/* Body defaults */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    background: #ffffff;
+    color: #0f1419;
+}
+
+/* Links */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Buttons and form controls */
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+/* Images */
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* Accessible hidden text */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
