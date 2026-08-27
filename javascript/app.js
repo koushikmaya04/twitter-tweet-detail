@@ -11,6 +11,9 @@ import {
     dedupe,
     pipe
 } from "./feed/pipeline.js";
+import {
+    loadImagesWithLimit
+} from "./images/image-queue.js";
 // ================================
 // Debounce search
 // ================================
@@ -139,3 +142,27 @@ console.log(
 console.log("Original posts:", posts);
 console.log("Pipeline result:", feed);
 console.log("Same array:", posts === feed);
+
+// ========================================
+// Lazy Image Queue Test
+// ========================================
+
+const testImages = Array.from(
+    { length: 6 },
+    (_, index) => {
+        const image = document.createElement("img");
+
+        image.className = "lazy-image";
+
+        image.dataset.src =
+            `https://picsum.photos/300/200?random=${index + 1}`;
+
+        image.alt = `Test image ${index + 1}`;
+
+        return image;
+    }
+);
+
+document.body.append(...testImages);
+
+loadImagesWithLimit(testImages, 3);
