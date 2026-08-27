@@ -1,0 +1,413 @@
+/* ========================================
+   Header Components
+   ======================================== */
+
+.site-header {
+    background: #ffffff;
+    border-bottom: 1px solid #e6ecf0;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 50%;
+}
+
+.brand:hover {
+    background: #f1f3f4;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    max-width: 500px;
+}
+
+.search-form input {
+    flex: 1;
+    min-height: 40px;
+    padding: 8px 14px;
+    border: 1px solid #cfd9de;
+    border-radius: 999px;
+    outline: none;
+    background: #f7f9fa;
+}
+
+.search-form input:focus {
+    border-color: #1d9bf0;
+    background: #ffffff;
+}
+
+.search-form button {
+    margin-left: 8px;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 999px;
+    background: #0f1419;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.profile-button {
+    padding: 8px 16px;
+    border: 1px solid #cfd9de;
+    border-radius: 999px;
+    background: #ffffff;
+    cursor: pointer;
+}
+
+
+/* ========================================
+   Navigation Components
+   ======================================== */
+
+.nav-link {
+    padding: 12px 16px;
+    border-radius: 999px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    background: #f1f3f4;
+}
+
+.compose-button {
+    min-height: 48px;
+    border: 0;
+    border-radius: 999px;
+    background: #1d9bf0;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.compose-button:hover {
+    background: #1a8cd8;
+}
+
+
+/* ========================================
+   Page Heading
+   ======================================== */
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.25rem;
+}
+
+.back-link:hover {
+    background: #f1f3f4;
+}
+
+
+/* ========================================
+   Tweet Components
+   ======================================== */
+
+.tweet-detail {
+    border-bottom: 1px solid #e6ecf0;
+}
+
+.tweet-header {
+    padding: 16px;
+}
+
+.author-avatar,
+.composer-avatar,
+.reply-avatar,
+.person-card > img {
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.author-avatar {
+    width: 48px;
+    height: 48px;
+}
+
+.composer-avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.reply-avatar {
+    width: 40px;
+    height: 40px;
+}
+
+.author-avatar img,
+.composer-avatar img,
+.reply-avatar img,
+.person-card > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.author-name {
+    font-weight: 700;
+}
+
+.author-name:hover {
+    text-decoration: underline;
+}
+
+.author-handle,
+.trend-category,
+.trend-count,
+.tweet-meta {
+    color: #536471;
+}
+
+.author-handle {
+    font-size: 0.95rem;
+}
+
+.tweet-menu-button {
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #536471;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.tweet-menu-button:hover {
+    background: #f1f3f4;
+}
+
+.tweet-text {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.tweet-media {
+    margin-top: 16px;
+    border: 1px solid #cfd9de;
+    border-radius: 16px;
+    background: #f7f9fa;
+}
+
+.tweet-media img {
+    border-radius: inherit;
+}
+
+.tweet-meta {
+    font-size: 0.95rem;
+}
+
+
+/* ========================================
+   Tweet Statistics
+   ======================================== */
+
+.tweet-stats {
+    border-bottom: 1px solid #e6ecf0;
+}
+
+.tweet-stats span {
+    color: #536471;
+}
+
+.tweet-stats strong {
+    color: #0f1419;
+}
+
+
+/* ========================================
+   Tweet Actions
+   ======================================== */
+
+.tweet-actions {
+    border-bottom: 1px solid #e6ecf0;
+}
+
+.action-button {
+    min-height: 40px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #536471;
+    cursor: pointer;
+}
+
+.action-button:hover {
+    background: #f1f3f4;
+}
+
+.like-button {
+    color: #536471;
+}
+
+.like-button[aria-pressed="true"] {
+    color: #f91880;
+    font-weight: 700;
+}
+
+
+/* ========================================
+   Reply Composer
+   ======================================== */
+
+.reply-composer {
+    border-bottom: 1px solid #e6ecf0;
+}
+
+.reply-form textarea {
+    min-height: 80px;
+    padding: 8px 0;
+    border: 0;
+    outline: none;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.reply-form textarea::placeholder {
+    color: #536471;
+}
+
+.character-count {
+    color: #536471;
+    font-size: 0.875rem;
+}
+
+.reply-submit-button {
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 999px;
+    background: #1d9bf0;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.reply-submit-button:hover {
+    background: #1a8cd8;
+}
+
+
+/* ========================================
+   Replies
+   ======================================== */
+
+.section-heading {
+    border-bottom: 1px solid #e6ecf0;
+}
+
+.reply-item {
+    border-bottom: 1px solid #e6ecf0;
+}
+
+.reply-item:hover {
+    background: #f7f9fa;
+}
+
+.reply-text {
+    margin: 8px 0 0;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.reply-actions button {
+    padding: 4px 8px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #536471;
+    cursor: pointer;
+}
+
+.reply-actions button:hover {
+    background: #f1f3f4;
+}
+
+
+/* ========================================
+   Right Sidebar Components
+   ======================================== */
+
+.sidebar-card {
+    overflow: hidden;
+    border-radius: 16px;
+    background: #f7f9fa;
+}
+
+.sidebar-card h2 {
+    margin: 0;
+    padding: 16px;
+    font-size: 1.25rem;
+}
+
+.person-card {
+    border-top: 1px solid #e6ecf0;
+}
+
+.person-card > img {
+    width: 40px;
+    height: 40px;
+}
+
+.follow-button {
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 999px;
+    background: #0f1419;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.follow-button:hover {
+    background: #272c30;
+}
+
+.trend-item {
+    border-top: 1px solid #e6ecf0;
+}
+
+.trend-item:hover {
+    background: #eef1f3;
+}
+
+.trend-item strong {
+    font-size: 0.95rem;
+}
+
+.trend-category,
+.trend-count {
+    font-size: 0.8rem;
+}
+
+
+/* ========================================
+   Footer Components
+   ======================================== */
+
+.site-footer {
+    color: #536471;
+}
+
+.site-footer a {
+    font-size: 0.875rem;
+}
+
+.site-footer a:hover {
+    text-decoration: underline;
+}
