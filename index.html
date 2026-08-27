@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta
         name="description"
-        content="Twitter-style tweet detail page built with HTML, CSS, and vanilla JavaScript."
+        content="Twitter-style tweet detail page built with semantic HTML, responsive CSS, and vanilla JavaScript."
     >
 
     <title>Tweet Detail</title>
@@ -20,17 +21,32 @@
 
 <body>
 
-    <!-- Header -->
+    <!-- ================================
+         Site Header
+         ================================ -->
     <header class="site-header">
+
         <nav class="top-nav" aria-label="Primary navigation">
 
-            <a href="#" class="brand" aria-label="Home">
+            <a
+                href="#"
+                class="brand"
+                aria-label="Home"
+            >
                 X
             </a>
 
-            <form class="search-form" role="search">
-                <label for="search-input" class="sr-only">
-                    Search
+            <form
+                class="search-form"
+                role="search"
+                aria-label="Search posts"
+            >
+
+                <label
+                    for="search-input"
+                    class="sr-only"
+                >
+                    Search posts
                 </label>
 
                 <input
@@ -39,11 +55,21 @@
                     type="search"
                     placeholder="Search"
                     autocomplete="off"
+                    spellcheck="false"
                 >
 
                 <button type="submit">
                     Search
                 </button>
+
+                <!-- Debounced search results -->
+                <div
+                    id="search-results"
+                    class="search-results"
+                    aria-live="polite"
+                    aria-label="Search results"
+                ></div>
+
             </form>
 
             <button
@@ -55,20 +81,28 @@
             </button>
 
         </nav>
+
     </header>
 
 
-    <!-- Page Layout -->
+    <!-- ================================
+         Page Layout
+         ================================ -->
     <div class="page-layout">
 
 
-        <!-- Left Sidebar -->
+        <!-- ============================
+             Left Sidebar
+             ============================ -->
         <aside
             class="left-sidebar"
             aria-label="Sidebar navigation"
         >
 
-            <nav class="sidebar-nav">
+            <nav
+                class="sidebar-nav"
+                aria-label="Sidebar"
+            >
 
                 <a href="#" class="nav-link">
                     Home
@@ -78,7 +112,10 @@
                     Explore
                 </a>
 
-                <a href="#" class="nav-link">
+                <a
+                    href="#notifications"
+                    class="nav-link"
+                >
                     Notifications
                 </a>
 
@@ -106,16 +143,22 @@
         </aside>
 
 
-        <!-- Main Content -->
+        <!-- ============================
+             Main Content
+             ============================ -->
         <main class="main-content">
 
+
+            <!-- ========================
+                 Tweet Detail
+                 ======================== -->
             <section
                 class="tweet-page"
                 aria-labelledby="page-title"
             >
 
                 <!-- Page Heading -->
-                <div class="page-heading">
+                <header class="page-heading">
 
                     <a
                         href="#"
@@ -129,13 +172,16 @@
                         Post
                     </h1>
 
-                </div>
+                </header>
 
 
-                <!-- Tweet -->
+                <!-- ====================
+                     Main Tweet
+                     ==================== -->
                 <article
                     class="tweet-detail"
                     data-post-id="1"
+                    data-post-type="tweet"
                 >
 
                     <!-- Tweet Header -->
@@ -146,14 +192,13 @@
                             <a
                                 href="#"
                                 class="author-avatar"
-                                aria-label="Open user profile"
+                                aria-label="Open Koushik Maya profile"
                             >
                                 <img
                                     src="assets/images/profile-placeholder.png"
-                                    alt="Profile picture"
+                                    alt="Koushik Maya profile picture"
                                 >
                             </a>
-
 
                             <div class="author-details">
 
@@ -170,11 +215,10 @@
 
                             </div>
 
-
                             <button
                                 type="button"
                                 class="tweet-menu-button"
-                                aria-label="More options"
+                                aria-label="More options for this post"
                             >
                                 ⋯
                             </button>
@@ -194,19 +238,17 @@
                         </p>
 
 
-                        <!-- Tweet Image -->
-                        <div
-                            class="tweet-media"
-                            aria-label="Post media"
-                        >
+                        <!-- Tweet Media -->
+                        <figure class="tweet-media">
 
                             <img
-                                src="assets/images/tweet-placeholder.jpg"
-                                alt="Tweet media"
-                                loading="lazy"
+                                class="lazy-image"
+                                src="assets/images/image-placeholder.jpg"
+                                data-src="assets/images/tweet-placeholder.jpg"
+                                alt="Tweet media showing the project interface"
                             >
 
-                        </div>
+                        </figure>
 
 
                         <!-- Tweet Metadata -->
@@ -231,31 +273,51 @@
                     </div>
 
 
-                    <!-- Tweet Statistics -->
+                    <!-- ====================
+                         Tweet Statistics
+                         ==================== -->
                     <div
                         class="tweet-stats"
                         aria-label="Post statistics"
                     >
 
-                        <span>
-                            <strong>12</strong>
+                        <span class="stat-item">
+                            <strong
+                                id="reply-count"
+                                class="reply-count"
+                            >
+                                12
+                            </strong>
                             Replies
                         </span>
 
-                        <span>
-                            <strong>148</strong>
+                        <span class="stat-item">
+                            <strong
+                                id="like-count"
+                                class="like-count"
+                                data-count="148"
+                            >
+                                148
+                            </strong>
                             Likes
                         </span>
 
-                        <span>
-                            <strong>27</strong>
+                        <span class="stat-item">
+                            <strong
+                                id="bookmark-count"
+                                class="bookmark-count"
+                            >
+                                27
+                            </strong>
                             Bookmarks
                         </span>
 
                     </div>
 
 
-                    <!-- Tweet Actions -->
+                    <!-- ====================
+                         Tweet Actions
+                         ==================== -->
                     <div
                         class="tweet-actions"
                         aria-label="Post actions"
@@ -264,6 +326,8 @@
                         <button
                             type="button"
                             class="action-button reply-button"
+                            data-action="reply"
+                            data-post-id="1"
                         >
                             Reply
                         </button>
@@ -271,6 +335,8 @@
                         <button
                             type="button"
                             class="action-button repost-button"
+                            data-action="repost"
+                            data-post-id="1"
                         >
                             Repost
                         </button>
@@ -279,6 +345,7 @@
                             type="button"
                             class="action-button like-button"
                             data-action="like"
+                            data-post-id="1"
                             aria-pressed="false"
                         >
                             Like
@@ -287,6 +354,9 @@
                         <button
                             type="button"
                             class="action-button bookmark-button"
+                            data-action="bookmark"
+                            data-post-id="1"
+                            aria-pressed="false"
                         >
                             Bookmark
                         </button>
@@ -294,6 +364,8 @@
                         <button
                             type="button"
                             class="action-button share-button"
+                            data-action="share"
+                            data-post-id="1"
                         >
                             Share
                         </button>
@@ -301,7 +373,9 @@
                     </div>
 
 
-                    <!-- Reply Composer -->
+                    <!-- ====================
+                         Reply Composer
+                         ==================== -->
                     <section
                         class="reply-composer"
                         aria-labelledby="reply-title"
@@ -313,7 +387,6 @@
                         >
                             Write a reply
                         </h2>
-
 
                         <div class="reply-composer-inner">
 
@@ -327,27 +400,30 @@
                                 >
                             </div>
 
-
                             <form class="reply-form">
 
                                 <label
                                     for="reply-input"
                                     class="sr-only"
                                 >
-                                    Post your reply
+                                    Write your reply
                                 </label>
 
                                 <textarea
                                     id="reply-input"
                                     name="reply"
                                     rows="3"
+                                    maxlength="280"
                                     placeholder="Post your reply"
+                                    aria-describedby="character-count"
                                 ></textarea>
-
 
                                 <div class="composer-footer">
 
-                                    <span class="character-count">
+                                    <span
+                                        id="character-count"
+                                        class="character-count"
+                                    >
                                         0 / 280
                                     </span>
 
@@ -367,7 +443,9 @@
                     </section>
 
 
-                    <!-- Replies -->
+                    <!-- ====================
+                         Replies / Thread
+                         ==================== -->
                     <section
                         class="replies-section"
                         aria-labelledby="replies-title"
@@ -381,22 +459,26 @@
 
                         </div>
 
-
-                        <div class="replies-list">
+                        <div
+                            id="replies-list"
+                            class="replies-list"
+                        >
 
                             <!-- Reply -->
-                            <article class="reply-item">
+                            <article
+                                class="reply-item"
+                                data-post-id="101"
+                                data-post-type="comment"
+                            >
 
                                 <div class="reply-avatar">
 
                                     <img
                                         src="assets/images/profile-placeholder.png"
-                                        alt="Profile picture"
-                                        loading="lazy"
+                                        alt="Alex Developer profile picture"
                                     >
 
                                 </div>
-
 
                                 <div class="reply-content">
 
@@ -420,11 +502,10 @@
                                         <time
                                             datetime="2026-08-26T17:15:00+05:30"
                                         >
-                                            15m
+                                            5:15 PM
                                         </time>
 
                                     </header>
-
 
                                     <p class="reply-text">
                                         This structure will make the
@@ -432,25 +513,37 @@
                                         to organize.
                                     </p>
 
-
                                     <div
                                         class="reply-actions"
                                         aria-label="Reply actions"
                                     >
 
-                                        <button type="button">
+                                        <button
+                                            type="button"
+                                            data-action="reply"
+                                        >
                                             Reply
                                         </button>
 
-                                        <button type="button">
+                                        <button
+                                            type="button"
+                                            data-action="repost"
+                                        >
                                             Repost
                                         </button>
 
-                                        <button type="button">
+                                        <button
+                                            type="button"
+                                            data-action="like"
+                                            aria-pressed="false"
+                                        >
                                             Like
                                         </button>
 
-                                        <button type="button">
+                                        <button
+                                            type="button"
+                                            data-action="share"
+                                        >
                                             Share
                                         </button>
 
@@ -468,10 +561,118 @@
 
             </section>
 
+
+            <!-- ========================
+                 Dynamic Feed
+                 ======================== -->
+            <section
+                class="feed-section"
+                aria-labelledby="feed-title"
+            >
+
+                <header class="section-heading">
+
+                    <h2 id="feed-title">
+                        Latest posts
+                    </h2>
+
+                </header>
+
+
+                <!-- Feed cards are rendered by JavaScript -->
+                <div
+                    id="feed-list"
+                    class="feed-list"
+                    aria-live="polite"
+                    aria-busy="false"
+                ></div>
+
+
+                <!-- ====================
+                     Loading Skeleton
+                     ==================== -->
+                <div
+                    id="feed-loading"
+                    class="feed-loading"
+                    hidden
+                    aria-live="polite"
+                    aria-label="Loading more posts"
+                >
+
+                    <article
+                        class="feed-skeleton"
+                        aria-hidden="true"
+                    >
+
+                        <div class="skeleton-avatar"></div>
+
+                        <div class="skeleton-lines">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- ====================
+                     Error / Retry State
+                     ==================== -->
+                <div
+                    id="feed-error"
+                    class="feed-error"
+                    role="alert"
+                    hidden
+                >
+
+                    <p>
+                        Unable to load more posts.
+                    </p>
+
+                    <button
+                        type="button"
+                        id="feed-retry"
+                        class="retry-button"
+                    >
+                        Retry
+                    </button>
+
+                </div>
+
+
+                <!-- ====================
+                     IntersectionObserver Sentinel
+
+                     root:
+                     null means the browser viewport.
+
+                     rootMargin:
+                     loads the next page before the
+                     sentinel is fully visible.
+
+                     threshold:
+                     0 means the observer fires when
+                     any part of the sentinel enters
+                     the observation area.
+                     ==================== -->
+                <div
+                    id="feed-sentinel"
+                    class="feed-sentinel"
+                    aria-hidden="true"
+                ></div>
+
+            </section>
+
         </main>
 
 
-        <!-- Right Sidebar -->
+        <!-- ============================
+             Right Sidebar
+             ============================ -->
         <aside
             class="right-sidebar"
             aria-label="Additional content"
@@ -484,15 +685,12 @@
                     Relevant people
                 </h2>
 
-
                 <article class="person-card">
 
                     <img
                         src="assets/images/profile-placeholder.png"
-                        alt="Profile picture"
-                        loading="lazy"
+                        alt="Alex Developer profile picture"
                     >
-
 
                     <div class="person-info">
 
@@ -509,10 +707,12 @@
 
                     </div>
 
-
                     <button
                         type="button"
                         class="follow-button"
+                        data-action="follow"
+                        data-user-id="alexdev"
+                        aria-pressed="false"
                     >
                         Follow
                     </button>
@@ -528,7 +728,6 @@
                 <h2>
                     What's happening
                 </h2>
-
 
                 <a
                     href="#"
@@ -548,7 +747,6 @@
                     </span>
 
                 </a>
-
 
                 <a
                     href="#"
@@ -576,7 +774,27 @@
     </div>
 
 
-    <!-- Footer -->
+    <!-- ================================
+         Notification Toast Region
+         ================================ -->
+    <div
+        id="notification-region"
+        class="notification-region"
+        aria-live="polite"
+        aria-atomic="false"
+    >
+
+        <div
+            id="notification-container"
+            class="notification-container"
+        ></div>
+
+    </div>
+
+
+    <!-- ================================
+         Site Footer
+         ================================ -->
     <footer class="site-footer">
 
         <nav aria-label="Footer navigation">
@@ -602,11 +820,14 @@
     </footer>
 
 
-    <!-- JavaScript -->
+    <!-- ================================
+         JavaScript Entry Point
+         ================================ -->
     <script
         src="javascript/app.js"
         defer
     ></script>
 
 </body>
+
 </html>
