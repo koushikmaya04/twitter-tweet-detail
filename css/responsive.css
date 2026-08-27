@@ -1,0 +1,109 @@
+/* ========================================
+   Tablet: 768px+
+   ======================================== */
+
+@media (min-width: 768px) {
+
+    .top-nav {
+        padding: 12px 24px;
+    }
+
+    .page-layout {
+        grid-template-columns: 200px minmax(0, 1fr) 260px;
+        gap: 20px;
+    }
+
+    .tweet-page {
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    .tweet-body {
+        padding: 20px;
+    }
+
+    .tweet-text {
+        font-size: 1.2rem;
+    }
+
+    .tweet-actions {
+        padding: 12px 20px;
+    }
+
+    .reply-composer {
+        padding: 20px;
+    }
+
+    .reply-item {
+        padding: 20px;
+    }
+
+    .right-sidebar {
+        display: flex;
+    }
+}
+
+
+/* ========================================
+   Desktop: 1024px+
+   ======================================== */
+
+@media (min-width: 1024px) {
+
+    .page-layout {
+        grid-template-columns: 240px minmax(0, 1fr) 300px;
+        gap: 24px;
+    }
+
+    .tweet-page {
+        max-width: 680px;
+    }
+
+    .tweet-header {
+        padding: 20px;
+    }
+
+    .tweet-body {
+        padding: 20px;
+    }
+
+    .tweet-text {
+        font-size: 1.25rem;
+    }
+
+    .tweet-actions {
+        gap: 12px;
+        padding: 12px 20px;
+    }
+
+    .action-button {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .reply-actions {
+        gap: 12px;
+    }
+}
+
+
+/* ========================================
+   Large Desktop: 1200px+
+   ======================================== */
+
+@media (min-width: 1200px) {
+
+    .page-layout {
+        grid-template-columns: 240px minmax(600px, 680px) 300px;
+        justify-content: center;
+    }
+
+    .tweet-page {
+        max-width: 680px;
+    }
+
+    .left-sidebar,
+    .right-sidebar {
+        padding-top: 24px;
+    }
+}
