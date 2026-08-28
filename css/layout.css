@@ -67,7 +67,7 @@
 .tweet-page,
 .feed-section {
     width: 100%;
-    max-width: 680px;
+    max-width: 720px;
     margin: 0 auto;
 }
 
@@ -77,7 +77,7 @@
    ======================================== */
 
 .page-heading {
-    min-height: 56px;
+    min-height: 64px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -86,6 +86,9 @@
 
 .page-heading h1 {
     margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    font-weight: 700;
 }
 
 
@@ -119,7 +122,7 @@
 
 .tweet-body {
     width: 100%;
-    padding: 16px;
+    padding: 20px;
 }
 
 .tweet-media {
@@ -162,8 +165,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 4px;
-    padding: 12px 16px;
+    gap: 8px;
+    padding: 12px 20px;
 }
 
 .action-button {
@@ -178,7 +181,7 @@
 
 .reply-composer {
     width: 100%;
-    padding: 16px;
+    padding: 20px;
 }
 
 .reply-composer-inner {
