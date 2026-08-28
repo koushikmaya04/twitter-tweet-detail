@@ -214,16 +214,17 @@
 .tweet-menu-button:hover {
     background: #f1f3f4;
 }
-
 .tweet-text {
+    max-width: 62ch;
     margin: 0;
     font-size: 1.25rem;
-    line-height: 1.45;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
 }
-
 .tweet-media {
     margin: 16px 0 0;
     overflow: hidden;
+    border: 1px solid #cfd9de;
     border: 1px solid #cfd9de;
     border-radius: 16px;
     background: #f7f9fa;
@@ -235,31 +236,41 @@
 }
 
 .tweet-meta {
-    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+    color: #536471;
+    font-size: 0.9rem;
 }
-
 
 /* ========================================
    Tweet Statistics
    ======================================== */
 
 .tweet-stats {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 20px;
     border-bottom: 1px solid #e6ecf0;
 }
 
 .stat-item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
     color: #536471;
+    font-size: 0.95rem;
 }
 
 .stat-item strong {
     color: #0f1419;
+    font-size: 1rem;
+    font-weight: 700;
 }
-
-.like-count {
-    display: inline-block;
-    min-width: 2ch;
-}
-
 
 /* ========================================
    Tweet Actions
@@ -270,26 +281,42 @@
 }
 
 .action-button {
-    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 8px 14px;
     border: 0;
     border-radius: 999px;
     background: transparent;
     color: #536471;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
 }
 
 .action-button:hover {
     background: #f1f3f4;
+    color: #0f1419;
+}
+
+.action-button:active {
+    transform: scale(0.98);
 }
 
 .like-button[aria-pressed="true"] {
-    color: #f91880;
+    background: #fce7f3;
+    color: #e6005c;
     font-weight: 700;
 }
 
 .bookmark-button[aria-pressed="true"] {
+    background: #e8f5fd;
+    color: #0b84d8;
     font-weight: 700;
 }
-
 
 /* ========================================
    Reply Composer
@@ -328,6 +355,79 @@
 
 .reply-submit-button:hover {
     background: #1a8cd8;
+}/* ========================================
+   Reply Composer
+   ======================================== */
+
+.reply-composer {
+    padding: 20px;
+    border-bottom: 1px solid #e6ecf0;
+}
+
+.reply-composer-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.reply-form {
+    flex: 1;
+    min-width: 0;
+}
+
+.reply-form textarea {
+    display: block;
+    width: 100%;
+    min-height: 96px;
+    padding: 12px 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #0f1419;
+    resize: vertical;
+}
+
+.reply-form textarea::placeholder {
+    color: #536471;
+}
+
+.reply-form textarea:focus {
+    outline: none;
+}
+
+.composer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #e6ecf0;
+}
+
+.character-count {
+    color: #536471;
+    font-size: 0.875rem;
+}
+
+.reply-submit-button {
+    min-height: 40px;
+    padding: 8px 18px;
+    border: 0;
+    border-radius: 999px;
+    background: #1d9bf0;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.reply-submit-button:hover {
+    background: #1a8cd8;
+}
+
+.reply-submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .reply-submit-button:disabled {
@@ -339,11 +439,23 @@
    Replies
    ======================================== */
 
+
 .section-heading {
+    padding: 16px 20px;
     border-bottom: 1px solid #e6ecf0;
 }
 
+.section-heading h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
 .reply-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
     border-bottom: 1px solid #e6ecf0;
 }
 
@@ -351,22 +463,46 @@
     background: #f7f9fa;
 }
 
+.reply-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.reply-header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
 .reply-text {
     margin: 8px 0 0;
-    line-height: 1.45;
+    color: #0f1419;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.reply-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
 }
 
 .reply-actions button {
-    min-height: 32px;
-    padding: 4px 8px;
+    min-height: 36px;
+    padding: 6px 10px;
     border: 0;
     border-radius: 999px;
     background: transparent;
     color: #536471;
+    font-size: 0.9rem;
 }
 
 .reply-actions button:hover {
     background: #f1f3f4;
+    color: #0f1419;
 }
 
 
@@ -377,14 +513,39 @@
 .feed-section {
     border-bottom: 1px solid #e6ecf0;
 }
+/* ========================================
+   Feed Cards
+   ======================================== */
 
 .feed-card {
-    padding: 16px;
+    width: 100%;
+    padding: 18px 20px;
     border-bottom: 1px solid #e6ecf0;
+    background: #ffffff;
+    transition: background-color 0.15s ease;
 }
 
 .feed-card:hover {
     background: #f7f9fa;
+}
+
+.feed-card h3 {
+    margin: 0 0 8px;
+    color: #0f1419;
+    font-size: 1rem;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.feed-card p {
+    margin: 0 0 8px;
+    color: #0f1419;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.feed-card p:last-child {
+    margin-bottom: 0;
 }
 
 
@@ -495,18 +656,25 @@
 
 .sidebar-card {
     overflow: hidden;
-    border-radius: 16px;
+    border: 1px solid #e6ecf0;
+    border-radius: 18px;
     background: #f7f9fa;
 }
 
 .sidebar-card h2 {
     margin: 0;
-    padding: 16px;
-    font-size: 1.25rem;
+    padding: 18px 16px;
+    font-size: 1.2rem;
+    line-height: 1.3;
 }
 
 .person-card {
+    min-height: 64px;
     border-top: 1px solid #e6ecf0;
+    transition: background-color 0.15s ease;
+}
+.person-card:hover {
+    background: #eef1f3;
 }
 
 .person-card > img {
