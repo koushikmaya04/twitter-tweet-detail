@@ -3,7 +3,18 @@ import "./likes/likes.js";
 import "./feed/infinite-scroll.js";
 import "./notifications/event-emitter.js";
 import "./images/image-queue.js";
-
+import {
+    filterByFollowing,
+    sortByRecency,
+    dedupe,
+    pipe
+} from "./feed/pipeline.js";
+import {
+    Post,
+    Tweet,
+    Comment,
+    Retweet
+} from "./models/post.js";
 
 // ========================================
 // Debounced Search
