@@ -1,3 +1,10 @@
+//REnder posts
+import { renderPosts } from "../ui/render.js";
+
+import {
+    sortByRecency,
+    dedupe
+} from "./pipeline.js";
 // ========================================
 // Infinite Scroll Feed
 // ========================================
@@ -7,6 +14,10 @@ const feedLoading = document.querySelector("#feed-loading");
 const feedError = document.querySelector("#feed-error");
 const feedRetry = document.querySelector("#feed-retry");
 const feedSentinel = document.querySelector("#feed-sentinel");
+
+if (!window.feedPosts) {
+    window.feedPosts = [];
+}
 
 let currentPage = 1;
 const postsPerPage = 10;
@@ -29,27 +40,6 @@ async function fetchPosts(page) {
     }
 
     return response.json();
-}
-
-
-// ========================================
-// Render posts
-// ========================================
-
-function renderPosts(posts) {
-    posts.forEach((post) => {
-        const article = document.createElement("article");
-
-        article.className = "feed-card";
-
-        article.innerHTML = `
-            <h3>Post #${post.id}</h3>
-            <p>${post.title}</p>
-            <p>${post.body}</p>
-        `;
-
-        feedList.appendChild(article);
-    });
 }
 
 
@@ -103,8 +93,22 @@ async function loadNextPage() {
             hasMorePosts = false;
             return;
         }
+// -----------------
+    const processedPosts = dedupe(
+    sortByRecency(posts)
+);
 
-        renderPosts(posts);
+window.feedPosts.push(...processedPosts);
+
+window.feedPosts = dedupe(
+    window.feedPosts
+);
+
+renderPosts(
+    processedPosts,
+    feedList
+);
+        // -----------------
 
         currentPage++;
     } catch (error) {
