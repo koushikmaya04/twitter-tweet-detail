@@ -1,3 +1,7 @@
+// ========================================
+// Filter By Following
+// ========================================
+
 function filterByFollowing(posts, following) {
     return posts.filter(
         (post) => following.includes(post.author)
@@ -5,14 +9,20 @@ function filterByFollowing(posts, following) {
 }
 
 
+// ========================================
+// Sort By Recency
+// ========================================
+
 function sortByRecency(posts) {
     return [...posts].sort(
-        (a, b) =>
-            new Date(b.createdAt) -
-            new Date(a.createdAt)
+        (a, b) => Number(b.id) - Number(a.id)
     );
 }
 
+
+// ========================================
+// Remove Duplicates
+// ========================================
 
 function dedupe(posts) {
     return posts.reduce(
@@ -32,6 +42,10 @@ function dedupe(posts) {
     );
 }
 
+
+// ========================================
+// Function Pipeline
+// ========================================
 
 function pipe(...functions) {
     return function (initialValue) {
