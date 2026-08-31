@@ -1,17 +1,4 @@
-const likeButton = document.querySelector(".like-button");
-const likeCount = document.querySelector("#like-count");
-
-let likeQueue = [];
-let isProcessing = false;
-
-function fakeLikeRequest(shouldFail = false) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (shouldFail) {
-                reject(new Error("Like request failed"));
-            } else {
-                resolve({ success: true });
-            }import { notificationEmitter } from "../notifications/event-emitter.js";
+import { notificationEmitter } from "../notifications/event-emitter.js";
 
 const likeButton = document.querySelector(".like-button");
 const likeCount = document.querySelector("#like-count");
@@ -21,7 +8,7 @@ let isProcessing = false;
 
 
 // ========================================
-// Fake API request
+// Fake Like Request
 // ========================================
 
 function fakeLikeRequest(shouldFail = false) {
@@ -48,29 +35,32 @@ async function processLikeQueue() {
 
     isProcessing = true;
 
-    const update = likeQueue.shift();
+    const action = likeQueue.shift();
 
     try {
-        await fakeLikeRequest(update.shouldFail);
+        await fakeLikeRequest(action.shouldFail);
 
         console.log(
-            `${update.type} request succeeded`
+            `${action.type} request succeeded`
         );
 
-        // Notify only for a successful like
-        if (update.type === "like") {
+        if (action.type === "like") {
             notificationEmitter.emit("like", {
-                name: "You"
+                name: "Sam"
             });
         }
 
     } catch (error) {
-        console.error(error);
+        console.error(
+            `${action.type} request failed:`,
+            error
+        );
 
-        // Roll back failed optimistic update
-        const currentCount = Number(likeCount.textContent);
+        const currentCount =
+            Number(likeCount.textContent);
 
-        if (update.type === "like") {
+        // Rollback optimistic update
+        if (action.type === "like") {
             likeCount.textContent =
                 Math.max(0, currentCount - 1);
 
@@ -78,6 +68,7 @@ async function processLikeQueue() {
                 "aria-pressed",
                 "false"
             );
+
         } else {
             likeCount.textContent =
                 currentCount + 1;
@@ -108,7 +99,7 @@ function handleLike() {
 
     if (isLiked) {
 
-        // Optimistic unlike
+        // Optimistic Unlike
         likeCount.textContent =
             Math.max(0, currentCount - 1);
 
@@ -124,7 +115,7 @@ function handleLike() {
 
     } else {
 
-        // Optimistic like
+        // Optimistic Like
         likeCount.textContent =
             currentCount + 1;
 
@@ -143,71 +134,13 @@ function handleLike() {
 }
 
 
-likeButton.addEventListener(
-    "click",
-    handleLike
-);
-        }, 1000);
-    });
+// ========================================
+// Event Listener
+// ========================================
+
+if (likeButton && likeCount) {
+    likeButton.addEventListener(
+        "click",
+        handleLike
+    );
 }
-
-async function processLikeQueue() {
-    if (isProcessing || likeQueue.length === 0) {
-        return;
-    }
-
-    isProcessing = true;
-
-    const update = likeQueue.shift();
-
-    console.log("Call stack: processing like");
-
-    try {
-        await fakeLikeRequest(update.shouldFail);
-
-        console.log("Microtask: like request succeeded");
-    } catch (error) {
-        console.log("Microtask: like request failed");
-
-        // Rollback optimistic update
-        likeCount.textContent = update.previousCount;
-        likeButton.setAttribute("aria-pressed", update.previousState);
-    }
-
-    isProcessing = false;
-
-    processLikeQueue();
-}
-
-function handleLike() {
-    const previousCount = Number(likeCount.textContent);
-    const previousState = likeButton.getAttribute("aria-pressed");
-
-    // Optimistic UI update
-    likeCount.textContent = previousCount + 1;
-    likeButton.setAttribute("aria-pressed", "true");
-
-    console.log("Call stack: optimistic update applied");
-
-    likeQueue.push({
-        previousCount,
-        previousState,
-        shouldFail: false
-    });
-
-    console.log("Call stack: update added to queue");
-
-    processLikeQueue();
-}
-
-likeButton.addEventListener("click", handleLike);
-
-console.log("Call stack: app started");
-
-Promise.resolve().then(() => {
-    console.log("Microtask: Promise callback");
-});
-
-setTimeout(() => {
-    console.log("Macrotask: setTimeout callback");
-}, 0);
