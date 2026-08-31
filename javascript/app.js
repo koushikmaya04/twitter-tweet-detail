@@ -15,6 +15,7 @@ import {
     Comment,
     Retweet
 } from "./models/post.js";
+import { renderPosts } from "../ui/render.js";
 
 // ========================================
 // Debounced Search
