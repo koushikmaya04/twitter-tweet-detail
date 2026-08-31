@@ -67,11 +67,11 @@
         font-size: 1.2rem;
     }
 
-    .tweet-actions {
-        gap: 8px;
-        padding: 12px 20px;
-    }
-
+  .tweet-actions {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 4px;
+    padding: 12px 16px;
+}
 
     /* ====================================
        Reply Composer
@@ -162,16 +162,16 @@
        Tweet Actions
        ==================================== */
 
-    .tweet-actions {
-        gap: 12px;
-        padding: 12px 20px;
-    }
+.tweet-actions {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 6px;
+    padding: 12px 16px;
+}
 
-    .action-button {
-        min-width: 44px;
-        min-height: 44px;
-    }
-
+.action-button {
+    min-width: 44px;
+    min-height: 44px;
+}
 
     /* ====================================
        Replies
@@ -233,7 +233,25 @@
 
 }
 
+/* ========================================
+   Mobile Tweet Actions
+   ======================================== */
 
+@media (max-width: 767px) {
+
+    .tweet-actions {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 2px;
+        padding: 10px 8px;
+    }
+
+    .action-button {
+        min-height: 44px;
+        padding: 8px 4px;
+        font-size: 0.875rem;
+        white-space: nowrap;
+    }
+}
 /* ========================================
    Reduced Motion Accessibility
    ======================================== */
@@ -243,5 +261,4 @@
     html {
         scroll-behavior: auto;
     }
-
 }
