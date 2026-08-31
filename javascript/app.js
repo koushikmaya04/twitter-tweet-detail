@@ -2,7 +2,9 @@ import debounce from "./search/debounce.js";
 
 import "./likes/likes.js";
 import "./feed/infinite-scroll.js";
-import "./notifications/event-emitter.js";
+import {
+    notificationEmitter
+} from "./notifications/event-emitter.js";
 import "./images/image-queue.js";
 
 import {
@@ -17,10 +19,6 @@ import {
 } from "./feed/pipeline.js";
 
 import { renderPosts } from "./ui/render.js";
-
-import {
-    notificationEmitter
-} from "./notifications/event-emitter.js";
 
 
 // ========================================
