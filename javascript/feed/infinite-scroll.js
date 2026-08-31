@@ -1,6 +1,6 @@
 //REnder posts
 import { renderPosts } from "../ui/render.js";
-
+import { Tweet } from "../models/post.js";
 import {
     sortByRecency,
     dedupe
@@ -86,7 +86,17 @@ async function loadNextPage() {
     showLoading();
 
     try {
-        const posts = await fetchPosts(currentPage);
+       const posts = await fetchPosts(currentPage);
+
+const tweetPosts = posts.map(
+    (post) =>
+        new Tweet(
+            post.id,
+            `User ${post.userId}`,
+            post.body,
+            0
+        )
+);
 
         // No more posts
         if (posts.length === 0) {
@@ -94,8 +104,8 @@ async function loadNextPage() {
             return;
         }
 // -----------------
-    const processedPosts = dedupe(
-    sortByRecency(posts)
+ const processedPosts = dedupe(
+    sortByRecency(tweetPosts)
 );
 
 window.feedPosts.push(...processedPosts);
