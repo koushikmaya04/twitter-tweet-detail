@@ -2,7 +2,6 @@
    Global Base Styles
    ======================================== */
 
-/* Global box sizing */
 *,
 *::before,
 *::after {
@@ -27,6 +26,7 @@ html {
 body {
     margin: 0;
     min-width: 320px;
+
     font-family:
         -apple-system,
         BlinkMacSystemFont,
@@ -35,9 +35,14 @@ body {
         Helvetica,
         Arial,
         sans-serif;
+
     line-height: 1.5;
-    background: #ffffff;
+
+    background: #f8fafb;
     color: #0f1419;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 
@@ -89,7 +94,7 @@ button:disabled {
 
 :focus-visible {
     outline: 2px solid #1d9bf0;
-    outline-offset: 2px;
+    outline-offset: 3px;
 }
 
 
@@ -107,7 +112,6 @@ img {
    Shared Utilities
    ======================================== */
 
-/* Accessible hidden text */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -121,13 +125,15 @@ img {
 }
 
 
-/* Respect the HTML hidden attribute */
 [hidden] {
     display: none !important;
 }
 
 
-/* Prevent long content from breaking layouts */
+/* ========================================
+   Prevent Content Overflow
+   ======================================== */
+
 p,
 span,
 strong,
@@ -138,18 +144,29 @@ textarea {
     overflow-wrap: anywhere;
 }
 
-
-/* Prevent form controls from forcing overflow */
 input,
 textarea {
     min-width: 0;
 }
 
 
-/* Improve keyboard navigation for interactive elements */
+/* ========================================
+   Touch / Interaction
+   ======================================== */
+
 a,
 button,
 input,
 textarea {
     -webkit-tap-highlight-color: transparent;
+}
+
+
+/* ========================================
+   Selection
+   ======================================== */
+
+::selection {
+    background: #cfe9fb;
+    color: #0f1419;
 }
