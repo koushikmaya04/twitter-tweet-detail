@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Lab | Twitter Tweet Detail</title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/javascript-demo.css">
+</head>
+<body>
+<header class="demo-header">
+  <div>
+    <p class="eyebrow">TWITTER-STYLE PROJECT</p>
+    <h1>JavaScript Lab</h1>
+    <p class="subtitle">Demonstrate the JavaScript concepts used by the application.</p>
+  </div>
+  <a class="back-to-app" href="index.html">← Back to app</a>
+</header>
+
+<main class="demo-container">
+  <section class="intro-card">
+    <h2>Mentor Demo</h2>
+    <p>Each section runs the real JavaScript modules used by the project. Open DevTools → Console while presenting to show the execution flow.</p>
+  </section>
+
+  <section class="demo-grid">
+    <article class="demo-card">
+      <div class="demo-number">01</div>
+      <h2>Classes, Inheritance &amp; Encapsulation</h2>
+      <p>Post is the base class. Tweet, Comment and Retweet inherit from it. The like counter is hidden through a closure.</p>
+      <button type="button" id="run-oop">Run Demo</button>
+      <pre id="oop-output" class="demo-output">Click Run Demo...</pre>
+    </article>
+
+    <article class="demo-card">
+      <div class="demo-number">02</div>
+      <h2>Functional Programming Pipeline</h2>
+      <p>filterByFollowing → sortByRecency → dedupe are composed with pipe(). The pipeline uses pure transformations and reduce().</p>
+      <button type="button" id="run-pipeline">Run Demo</button>
+      <pre id="pipeline-output" class="demo-output">Click Run Demo...</pre>
+    </article>
+
+    <article class="demo-card">
+      <div class="demo-number">03</div>
+      <h2>Lazy Image Queue</h2>
+      <p>Images enter the queue when they approach the viewport. The queue loads a maximum of 3 images concurrently.</p>
+      <div id="image-demo-list" class="image-demo-list">
+        <div class="demo-image-card"><img class="lazy-image demo-lazy-image" data-src="https://picsum.photos/seed/js1/600/350" alt="Demo image 1"><span>Image 1</span></div>
+        <div class="demo-image-card"><img class="lazy-image demo-lazy-image" data-src="https://picsum.photos/seed/js2/600/350" alt="Demo image 2"><span>Image 2</span></div>
+        <div class="demo-image-card"><img class="lazy-image demo-lazy-image" data-src="https://picsum.photos/seed/js3/600/350" alt="Demo image 3"><span>Image 3</span></div>
+      </div>
+      <button type="button" id="run-image-queue">Start Image Queue</button>
+      <pre id="image-output" class="demo-output">Waiting for images...</pre>
+    </article>
+
+    <article class="demo-card">
+      <div class="demo-number">04</div>
+      <h2>Custom Promise.all</h2>
+      <p>promiseAllCustom() waits for multiple asynchronous tasks and preserves their original order.</p>
+      <button type="button" id="run-promise">Run Demo</button>
+      <pre id="promise-output" class="demo-output">Click Run Demo...</pre>
+    </article>
+
+    <article class="demo-card">
+      <div class="demo-number">05</div>
+      <h2>IntersectionObserver</h2>
+      <p>The observer detects when the box enters the viewport without continuously listening to scroll events.</p>
+      <div id="observer-spacer" class="observer-spacer">Scroll down until the target appears.</div>
+      <div id="observer-target" class="observer-target">Observer target</div>
+      <button type="button" id="run-observer">Activate Observer</button>
+      <pre id="observer-output" class="demo-output">Click Activate Observer...</pre>
+    </article>
+
+    <article class="demo-card">
+      <div class="demo-number">06</div>
+      <h2>EventEmitter / Observer Pattern</h2>
+      <p>A publisher emits an event and subscribed listeners react to it. This is used by the notification system.</p>
+      <button type="button" id="run-events">Run Demo</button>
+      <pre id="event-output" class="demo-output">Click Run Demo...</pre>
+    </article>
+  </section>
+
+  <section class="app-features-card">
+    <h2>Live App Features</h2>
+    <div class="feature-list">
+      <a href="index.html#feed-title"><strong>Infinite Scroll</strong><span>IntersectionObserver + JSONPlaceholder /photos pagination</span></a>
+      <a href="index.html#search-input"><strong>Debounced Search</strong><span>Waits 500ms after typing stops before searching</span></a>
+      <a href="index.html#like-count"><strong>Optimistic Like</strong><span>Updates immediately and rolls back if the request fails</span></a>
+      <a href="index.html#notification-region"><strong>Notification Queue</strong><span>EventEmitter + queued toast notifications</span></a>
+    </div>
+  </section>
+</main>
+
+<script type="module" src="javascript/demos/javascript-demo.js"></script>
+</body>
+</html>
