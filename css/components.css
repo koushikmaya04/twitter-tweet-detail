@@ -1124,3 +1124,371 @@
     color: #0f1419;
     text-decoration: underline;
 }
+/* ========================================
+   Feed Cards
+   ======================================== */
+
+.feed-card {
+    width: 100%;
+    padding: 18px 24px;
+
+    border-bottom: 1px solid #e6ecf0;
+
+    background: #ffffff;
+
+    transition:
+        background-color 0.15s ease;
+}
+
+.feed-card:hover {
+    background: #f8fafb;
+}
+
+
+/* ========================================
+   Feed Header
+   ======================================== */
+
+.feed-card-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+.feed-card-author {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+
+.feed-avatar {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #1d9bf0;
+
+    color: #ffffff;
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+.feed-card-header h3 {
+    margin: 0;
+
+    color: #0f1419;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.feed-card-handle {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #536471;
+
+    font-size: 14px;
+}
+
+
+/* ========================================
+   More Button
+   ======================================== */
+
+.tweet-more-button {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    padding: 7px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #536471;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.tweet-more-button:hover {
+    background: #e8f5fd;
+
+    color: #1d9bf0;
+}
+
+.tweet-more-button svg {
+    width: 18px;
+    height: 18px;
+
+    fill: currentColor;
+}
+
+
+/* ========================================
+   Feed Body
+   ======================================== */
+
+.feed-card-body {
+    margin-left: 52px;
+
+    margin-top: 2px;
+}
+
+
+.feed-post-content {
+    margin: 0;
+
+    color: #0f1419;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    word-break: break-word;
+}
+
+
+/* ========================================
+   Feed Images
+   ======================================== */
+
+.feed-card-media {
+    overflow: hidden;
+
+    margin-top: 12px;
+
+    border: 1px solid #cfd9de;
+
+    border-radius: 16px;
+
+    background: #f7f9fa;
+
+    min-height: 180px;
+}
+
+
+.feed-card-media img {
+    display: block;
+
+    width: 100%;
+
+    max-height: 420px;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.2s ease;
+}
+
+
+.feed-card-media img.is-loaded {
+    opacity: 1;
+}
+
+
+.feed-card-media img.is-loading {
+    opacity: 0.35;
+}
+
+
+.feed-card-media img.is-error {
+    min-height: 180px;
+
+    opacity: 1;
+}
+
+
+/* ========================================
+   Feed Actions
+   ======================================== */
+
+.feed-card-actions {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    max-width: 520px;
+
+    margin-left: 52px;
+
+    margin-top: 10px;
+}
+
+
+.feed-action-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 5px;
+
+    min-width: 70px;
+
+    min-height: 34px;
+
+    padding: 6px 10px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background: transparent;
+
+    color: #536471;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.1s ease;
+}
+
+
+.feed-action-button:hover {
+    background: #e8f5fd;
+
+    color: #1d9bf0;
+}
+
+
+.feed-action-button:active {
+    transform: scale(0.94);
+}
+
+
+.feed-action-button svg {
+    width: 18px;
+    height: 18px;
+
+    fill: currentColor;
+
+    flex-shrink: 0;
+}
+
+
+/* ========================================
+   Like
+   ======================================== */
+
+.feed-action-button.like-action:hover {
+    background: #fce8ef;
+
+    color: #e91e63;
+}
+
+
+.feed-action-button.like-action[aria-pressed="true"] {
+    background: #fce8ef;
+
+    color: #e91e63;
+}
+
+
+/* ========================================
+   Repost
+   ======================================== */
+
+.feed-action-button[data-action="repost"]:hover {
+    background: #e8f7ef;
+
+    color: #00ba7c;
+}
+
+
+/* ========================================
+   Loading Image Skeleton
+   ======================================== */
+
+.feed-card-media:has(
+    img.is-loading
+) {
+    background:
+        linear-gradient(
+            90deg,
+            #f1f3f4,
+            #e6e8ea,
+            #f1f3f4
+        );
+
+    background-size: 200% 100%;
+
+    animation:
+        imageSkeleton 1.3s infinite;
+}
+
+
+@keyframes imageSkeleton {
+
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 700px) {
+
+    .feed-card {
+        padding: 16px;
+    }
+
+    .feed-card-body,
+    .feed-card-actions {
+        margin-left: 0;
+    }
+
+    .feed-action-button {
+        min-width: 0;
+        padding: 6px 8px;
+    }
+}
