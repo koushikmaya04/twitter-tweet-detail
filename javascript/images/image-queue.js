@@ -1,95 +1,223 @@
 /* ========================================
    Lazy Image Loading Queue
-   Maximum 3 concurrent loads
+
+   Maximum:
+   3 images loading simultaneously
    ======================================== */
 
 const MAX_CONCURRENT_IMAGES = 3;
 
 let activeLoads = 0;
+
 const imageQueue = [];
+
 let queueRunning = false;
+
 let lazyImageObserver = null;
+
 
 /* ========================================
    Load One Image
    ======================================== */
 
 function loadImage(image) {
+
     return new Promise((resolve, reject) => {
-        const imageUrl = image.dataset.src;
+
+        const imageUrl =
+            image.dataset.src;
+
+        const fallbackUrl =
+            image.dataset.fallback;
 
         if (!imageUrl) {
-            reject(new Error("Image URL is missing"));
+
+            reject(
+                new Error(
+                    "Image URL is missing"
+                )
+            );
+
             return;
         }
 
-        image.classList.add("is-loading");
+        image.classList.add(
+            "is-loading"
+        );
 
         const loader = new Image();
 
+        let usingFallback = false;
+
+        /* ========================================
+           Successful Load
+           ======================================== */
+
         loader.onload = () => {
-            image.src = imageUrl;
-            image.removeAttribute("data-src");
-            image.classList.remove("is-loading");
-            image.classList.add("is-loaded");
+
+            image.src = loader.src;
+
+            image.removeAttribute(
+                "data-src"
+            );
+
+            image.removeAttribute(
+                "data-fallback"
+            );
+
+            image.dataset.queued = "false";
+
+            image.classList.remove(
+                "is-loading"
+            );
+
+            image.classList.remove(
+                "is-error"
+            );
+
+            image.classList.add(
+                "is-loaded"
+            );
+
             resolve(image);
         };
 
+        /* ========================================
+           Failed Load
+           ======================================== */
+
         loader.onerror = () => {
-            image.classList.remove("is-loading");
-            image.classList.add("is-error");
-            reject(new Error(`Failed to load image: ${imageUrl}`));
+
+            /*
+             * First failure:
+             * try fallback image.
+             */
+            if (
+                !usingFallback &&
+                fallbackUrl
+            ) {
+
+                usingFallback = true;
+
+                console.warn(
+                    "[Image Queue] Primary image failed. Using fallback."
+                );
+
+                loader.src =
+                    fallbackUrl;
+
+                return;
+            }
+
+            /* ========================================
+               Both URLs failed
+               ======================================== */
+
+            image.classList.remove(
+                "is-loading"
+            );
+
+            image.classList.add(
+                "is-error"
+            );
+
+            image.dataset.queued = "false";
+
+            reject(
+                new Error(
+                    `Failed to load image: ${imageUrl}`
+                )
+            );
         };
 
+        /*
+         * Start actual browser image request.
+         */
         loader.src = imageUrl;
     });
 }
 
+
 /* ========================================
-   Custom Promise.all-style helper
+   Custom Promise.all-style Function
    ======================================== */
 
 function promiseAllCustom(tasks) {
-    return new Promise((resolve, reject) => {
-        const results = [];
-        let completed = 0;
 
-        if (tasks.length === 0) {
-            resolve(results);
-            return;
+    return new Promise(
+        (resolve, reject) => {
+
+            const results = [];
+
+            let completed = 0;
+
+            if (tasks.length === 0) {
+
+                resolve(results);
+
+                return;
+            }
+
+            tasks.forEach(
+                (task, index) => {
+
+                    Promise.resolve()
+                        .then(task)
+                        .then((result) => {
+
+                            results[index] =
+                                result;
+
+                            completed++;
+
+                            if (
+                                completed ===
+                                tasks.length
+                            ) {
+
+                                resolve(
+                                    results
+                                );
+                            }
+                        })
+                        .catch(reject);
+                }
+            );
         }
-
-        tasks.forEach((task, index) => {
-            Promise.resolve()
-                .then(task)
-                .then((result) => {
-                    results[index] = result;
-                    completed++;
-
-                    if (completed === tasks.length) {
-                        resolve(results);
-                    }
-                })
-                .catch(reject);
-        });
-    });
+    );
 }
 
+
 /* ========================================
-   Queue
+   Add Image To Queue
    ======================================== */
 
 function enqueueImage(image) {
+
+    if (!image) {
+        return;
+    }
+
+    if (!image.dataset.src) {
+        return;
+    }
+
     if (
-        !image ||
-        !image.dataset.src ||
-        image.dataset.queued === "true" ||
-        image.classList.contains("is-loaded")
+        image.dataset.queued === "true"
+    ) {
+        return;
+    }
+
+    if (
+        image.classList.contains(
+            "is-loaded"
+        )
     ) {
         return;
     }
 
     image.dataset.queued = "true";
+
     imageQueue.push(image);
 
     console.log(
@@ -99,7 +227,13 @@ function enqueueImage(image) {
     processImageQueue();
 }
 
+
+/* ========================================
+   Process Queue
+   ======================================== */
+
 async function processImageQueue() {
+
     if (queueRunning) {
         return;
     }
@@ -107,108 +241,237 @@ async function processImageQueue() {
     queueRunning = true;
 
     try {
-        while (imageQueue.length > 0) {
-            const availableSlots =
-                MAX_CONCURRENT_IMAGES - activeLoads;
 
-            if (availableSlots <= 0) {
-                await new Promise((resolve) => {
-                    setTimeout(resolve, 50);
-                });
+        while (
+            imageQueue.length > 0
+        ) {
+
+            const availableSlots =
+                MAX_CONCURRENT_IMAGES -
+                activeLoads;
+
+            if (
+                availableSlots <= 0
+            ) {
+
+                await new Promise(
+                    (resolve) => {
+
+                        setTimeout(
+                            resolve,
+                            50
+                        );
+                    }
+                );
+
                 continue;
             }
 
-            const batch = imageQueue.splice(
-                0,
-                availableSlots
-            );
+            /*
+             * Never take more than 3 images.
+             */
+            const batch =
+                imageQueue.splice(
+                    0,
+                    availableSlots
+                );
 
-            activeLoads += batch.length;
-
-            console.log(
-                `[Image Queue] starting ${batch.length} image(s); active=${activeLoads}`
-            );
-
-            const tasks = batch.map((image) => {
-                return () => loadImage(image)
-                    .then((result) => {
-                        console.log(
-                            `[Image Queue] loaded: ${result.src}`
-                        );
-                        return result;
-                    })
-                    .catch((error) => {
-                        console.error(
-                            "[Image Queue] failed:",
-                            error
-                        );
-                        return null;
-                    });
-            });
-
-            await promiseAllCustom(tasks);
-
-            activeLoads -= batch.length;
+            activeLoads +=
+                batch.length;
 
             console.log(
-                `[Image Queue] batch complete; active=${activeLoads}`
+                `[Image Queue] START batch=${batch.length} active=${activeLoads}`
+            );
+
+            /*
+             * Convert each image into a task.
+             */
+            const tasks =
+                batch.map(
+                    (image) => {
+
+                        return () => {
+
+                            console.log(
+                                `[Image Queue] loading ${image.dataset.src}`
+                            );
+
+                            return loadImage(
+                                image
+                            );
+                        };
+                    }
+                );
+
+            /*
+             * Our own Promise.all implementation
+             * waits for the whole batch.
+             */
+            await promiseAllCustom(
+                tasks.map(
+                    (task) => {
+
+                        return () =>
+                            task()
+                                .catch(
+                                    (error) => {
+
+                                        console.error(
+                                            "[Image Queue] failed:",
+                                            error
+                                        );
+
+                                        return null;
+                                    }
+                                );
+                    }
+                )
+            );
+
+            activeLoads -=
+                batch.length;
+
+            console.log(
+                `[Image Queue] END batch active=${activeLoads}`
             );
         }
+
     } finally {
+
         queueRunning = false;
     }
 }
 
+
 /* ========================================
-   IntersectionObserver for Images
+   IntersectionObserver
    ======================================== */
 
-function observeLazyImages(container = document) {
-    if (!("IntersectionObserver" in window)) {
-        const images = [
-            ...container.querySelectorAll(".lazy-image[data-src]")
-        ];
+function observeLazyImages(
+    container = document
+) {
 
-        images.forEach(enqueueImage);
+    /*
+     * Browser fallback.
+     */
+    if (
+        !(
+            "IntersectionObserver"
+            in window
+        )
+    ) {
+
+        const images =
+            [
+                ...container.querySelectorAll(
+                    ".lazy-image[data-src]"
+                )
+            ];
+
+        images.forEach(
+            enqueueImage
+        );
+
         return;
     }
 
-    if (!lazyImageObserver) {
-        lazyImageObserver = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
+    /* ========================================
+       Create Observer Once
+       ======================================== */
 
-                    enqueueImage(entry.target);
-                    lazyImageObserver.unobserve(entry.target);
-                });
-            },
-            {
-                root: null,
-                rootMargin: "200px",
-                threshold: 0
-            }
-        );
+    if (!lazyImageObserver) {
+
+        lazyImageObserver =
+            new IntersectionObserver(
+                (entries) => {
+
+                    entries.forEach(
+                        (entry) => {
+
+                            if (
+                                !entry.isIntersecting
+                            ) {
+                                return;
+                            }
+
+                            enqueueImage(
+                                entry.target
+                            );
+
+                            /*
+                             * Stop watching after
+                             * putting it in the queue.
+                             */
+                            lazyImageObserver.unobserve(
+                                entry.target
+                            );
+                        }
+                    );
+                },
+                {
+                    /*
+                     * null = viewport
+                     */
+                    root: null,
+
+                    /*
+                     * Start loading 200px
+                     * before the image enters.
+                     */
+                    rootMargin: "200px",
+
+                    /*
+                     * Trigger immediately
+                     * when entering.
+                     */
+                    threshold: 0
+                }
+            );
     }
 
-    const images = [
-        ...container.querySelectorAll(".lazy-image[data-src]")
-    ];
+    /* ========================================
+       Find New Lazy Images
+       ======================================== */
 
-    images.forEach((image) => {
-        lazyImageObserver.observe(image);
-    });
+    const images =
+        [
+            ...container.querySelectorAll(
+                ".lazy-image[data-src]"
+            )
+        ];
+
+    images.forEach(
+        (image) => {
+
+            if (
+                image.dataset.queued !==
+                "true"
+            ) {
+
+                lazyImageObserver.observe(
+                    image
+                );
+            }
+        }
+    );
 }
+
 
 /* ========================================
-   Existing-page initialization
+   Existing Page Initialization
    ======================================== */
 
-if (document.querySelector(".lazy-image")) {
-    observeLazyImages(document);
+if (
+    document.querySelector(
+        ".lazy-image"
+    )
+) {
+
+    observeLazyImages(
+        document
+    );
 }
+
 
 /* ========================================
    Exports
