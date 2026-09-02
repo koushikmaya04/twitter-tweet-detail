@@ -1,4 +1,5 @@
 import debounce from "./search/debounce.js";
+
 import "./likes/likes.js";
 import "./feed/infinite-scroll.js";
 import "./notifications/event-emitter.js";
@@ -9,10 +10,15 @@ import "./images/image-queue.js";
 // Debounced Search
 // ========================================
 
-const searchInput = document.querySelector("#search-input");
+import { renderPosts } from "./ui/render.js";
 
-function handleSearch(value) {
-    console.log("Searching for:", value);
+
+// ========================================
+// Feed Storage
+// ========================================
+
+if (!window.feedPosts) {
+    window.feedPosts = [];
 }
 
 const debouncedSearch = debounce(handleSearch, 500);

@@ -1,22 +1,51 @@
-function filterByFollowing(posts, following) {
-    return posts.filter(post => following.includes(post.author));
-}
+// ========================================
+// Filter By Following
+// ========================================
 
-function sortByRecency(posts) {
-    return [...posts].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+function filterByFollowing(posts, following) {
+    return posts.filter(
+        (post) => following.includes(post.author)
     );
 }
 
-function dedupe(posts) {
-    return posts.reduce((uniquePosts, post) => {
-        if (!uniquePosts.some(item => item.id === post.id)) {
-            uniquePosts.push(post);
-        }
 
-        return uniquePosts;
-    }, []);
+// ========================================
+// Sort By Recency
+// ========================================
+
+function sortByRecency(posts) {
+    return [...posts].sort(
+        (a, b) => Number(b.id) - Number(a.id)
+    );
 }
+
+
+// ========================================
+// Remove Duplicates
+// ========================================
+
+function dedupe(posts) {
+    return posts.reduce(
+        (uniquePosts, post) => {
+
+            if (
+                !uniquePosts.some(
+                    (item) => item.id === post.id
+                )
+            ) {
+                uniquePosts.push(post);
+            }
+
+            return uniquePosts;
+        },
+        []
+    );
+}
+
+
+// ========================================
+// Function Pipeline
+// ========================================
 
 function pipe(...functions) {
     return function (initialValue) {
@@ -26,6 +55,7 @@ function pipe(...functions) {
         );
     };
 }
+
 
 export {
     filterByFollowing,

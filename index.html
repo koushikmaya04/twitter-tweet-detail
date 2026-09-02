@@ -36,11 +36,12 @@
                 X
             </a>
 
-            <form
-                class="search-form"
-                role="search"
-                aria-label="Search posts"
-            >
+       <form
+    id="search-form"
+    class="search-form"
+    role="search"
+    aria-label="Search posts"
+>
 
                 <label
                     for="search-input"
@@ -318,51 +319,56 @@
                     >
 
                         <button
-                            type="button"
-                            class="action-button reply-button"
-                            data-action="reply"
-                            data-post-id="1"
-                        >
-                            Reply
-                        </button>
+    type="button"
+    class="action-button reply-button"
+    data-action="reply"
+    data-post-id="1"
+    aria-label="Reply"
+>
+    💬
+</button>
 
-                        <button
-                            type="button"
-                            class="action-button repost-button"
-                            data-action="repost"
-                            data-post-id="1"
-                        >
-                            Repost
-                        </button>
+<button
+    type="button"
+    class="action-button repost-button"
+    data-action="repost"
+    data-post-id="1"
+    aria-label="Repost"
+>
+    🔁
+</button>
 
-                        <button
-                            type="button"
-                            class="action-button like-button"
-                            data-action="like"
-                            data-post-id="1"
-                            aria-pressed="false"
-                        >
-                            Like
-                        </button>
+<button
+    type="button"
+    class="action-button like-button"
+    data-action="like"
+    data-post-id="1"
+    aria-pressed="false"
+    aria-label="Like"
+>
+    ❤️
+</button>
 
-                        <button
-                            type="button"
-                            class="action-button bookmark-button"
-                            data-action="bookmark"
-                            data-post-id="1"
-                            aria-pressed="false"
-                        >
-                            Bookmark
-                        </button>
+<button
+    type="button"
+    class="action-button bookmark-button"
+    data-action="bookmark"
+    data-post-id="1"
+    aria-pressed="false"
+    aria-label="Bookmark"
+>
+    🔖
+</button>
 
-                        <button
-                            type="button"
-                            class="action-button share-button"
-                            data-action="share"
-                            data-post-id="1"
-                        >
-                            Share
-                        </button>
+<button
+    type="button"
+    class="action-button share-button"
+    data-action="share"
+    data-post-id="1"
+    aria-label="Share"
+>
+    📤
+</button>
 
                     </div>
 
@@ -418,7 +424,7 @@
                                         id="character-count"
                                         class="character-count"
                                     >
-                                        0 / 280
+                                      
                                     </span>
 
                                     <button

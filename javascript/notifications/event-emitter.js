@@ -142,26 +142,26 @@ notificationEmitter.on(
 // Test Events
 // ========================================
 
-notificationEmitter.emit(
-    "new-follower",
-    {
-        name: "Alex Developer"
-    }
-);
+// notificationEmitter.emit(
+//     "new-follower",
+//     {
+//         name: "Alex Developer"
+//     }
+// );
 
-notificationEmitter.emit(
-    "like",
-    {
-        name: "Sam"
-    }
-);
+// notificationEmitter.emit(
+//     "like",
+//     {
+//         name: "Sam"                    
+//     }
+// );
 
-notificationEmitter.emit(
-    "comment",
-    {
-        name: "John"
-    }
-);
+// notificationEmitter.emit(
+//     "comment",
+//     {
+//         name: "John"
+//     }
+// );
 
 
 // ========================================

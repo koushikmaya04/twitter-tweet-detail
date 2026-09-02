@@ -4,7 +4,6 @@ class Post {
         this.author = author;
         this.content = content;
 
-        // Encapsulated like counter using a closure
         let likeCount = likes;
 
         this.like = function () {
@@ -17,12 +16,9 @@ class Post {
             }
         };
 
-        // Getter for controlled read access
-        Object.defineProperty(this, "likes", {
-            get() {
-                return likeCount;
-            }
-        });
+        this.getLikes = function () {
+            return likeCount;
+        };
     }
 }
 
@@ -30,7 +26,6 @@ class Post {
 class Tweet extends Post {
     constructor(id, author, content, likes = 0) {
         super(id, author, content, likes);
-
         this.type = "tweet";
     }
 }
@@ -39,22 +34,14 @@ class Tweet extends Post {
 class Comment extends Post {
     constructor(id, author, content, likes = 0) {
         super(id, author, content, likes);
-
         this.type = "comment";
     }
 }
 
 
 class Retweet extends Post {
-    constructor(id, author, originalPost, likes = 0) {
-        super(
-            id,
-            author,
-            `Retweet of: ${originalPost.content}`,
-            likes
-        );
-
-        this.originalPost = originalPost;
+    constructor(id, author, content, likes = 0) {
+        super(id, author, content, likes);
         this.type = "retweet";
     }
 }
