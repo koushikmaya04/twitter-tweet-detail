@@ -9,7 +9,7 @@
        ==================================== */
 
     .top-nav {
-        padding: 12px 24px;
+        padding: 10px 24px;
         gap: 16px;
     }
 
@@ -20,9 +20,16 @@
 
     .page-layout {
         width: min(100%, 960px);
+
         display: grid;
-        grid-template-columns: 200px minmax(0, 1fr);
-        gap: 20px;
+
+        grid-template-columns:
+            200px
+            minmax(0, 1fr);
+
+        gap: 24px;
+
+        padding: 0 20px;
     }
 
 
@@ -32,11 +39,16 @@
 
     .left-sidebar {
         position: sticky;
-        top: 64px;
+
+        top: 76px;
+
         height: fit-content;
+
         display: flex;
         flex-direction: column;
-        gap: 24px;
+
+        gap: 20px;
+
         padding: 20px 0;
     }
 
@@ -47,7 +59,7 @@
 
     .tweet-page,
     .feed-section {
-        max-width: 650px;
+        max-width: 680px;
     }
 
 
@@ -60,18 +72,13 @@
     }
 
     .tweet-body {
-        padding: 20px;
+        padding: 22px;
     }
 
     .tweet-text {
-        font-size: 1.2rem;
+        font-size: 1.18rem;
     }
 
-  .tweet-actions {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 4px;
-    padding: 12px 16px;
-}
 
     /* ====================================
        Reply Composer
@@ -108,9 +115,9 @@
         right: 24px;
         bottom: 24px;
         left: auto;
+
         width: 360px;
     }
-
 }
 
 
@@ -125,9 +132,16 @@
        ==================================== */
 
     .page-layout {
-        width: min(1200px, 100%);
-        grid-template-columns: 240px minmax(0, 1fr) 300px;
-        gap: 24px;
+        width: min(1180px, 100%);
+
+        grid-template-columns:
+            220px
+            minmax(0, 1fr)
+            280px;
+
+        gap: 28px;
+
+        padding: 0 20px;
     }
 
 
@@ -137,7 +151,7 @@
 
     .tweet-page,
     .feed-section {
-        max-width: 720px;
+        max-width: 680px;
     }
 
 
@@ -154,7 +168,7 @@
     }
 
     .tweet-text {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
     }
 
 
@@ -162,23 +176,14 @@
        Tweet Actions
        ==================================== */
 
-.tweet-actions {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 6px;
-    padding: 12px 16px;
-}
+    .tweet-actions {
+        gap: 6px;
+        padding: 10px 12px;
+    }
 
-.action-button {
-    min-width: 44px;
-    min-height: 44px;
-}
-
-    /* ====================================
-       Replies
-       ==================================== */
-
-    .reply-actions {
-        gap: 12px;
+    .action-button {
+        min-width: 44px;
+        min-height: 42px;
     }
 
 
@@ -188,14 +193,27 @@
 
     .right-sidebar {
         position: sticky;
-        top: 64px;
+
+        top: 76px;
+
         height: fit-content;
+
         display: flex;
         flex-direction: column;
+
         gap: 20px;
+
         padding: 20px 0;
     }
 
+
+    /* ====================================
+       Left Sidebar
+       ==================================== */
+
+    .left-sidebar {
+        top: 76px;
+    }
 }
 
 
@@ -206,9 +224,16 @@
 @media (min-width: 1200px) {
 
     .page-layout {
-        width: 1200px;
-        grid-template-columns: 240px minmax(600px, 680px) 300px;
+        width: 1180px;
+
+        grid-template-columns:
+            220px
+            minmax(600px, 680px)
+            280px;
+
         justify-content: center;
+
+        padding: 0;
     }
 
 
@@ -228,30 +253,272 @@
 
     .tweet-page,
     .feed-section {
-        max-width: 720px;
+        max-width: 680px;
     }
-
 }
 
+
 /* ========================================
-   Mobile Tweet Actions
+   Mobile: below 768px
    ======================================== */
 
 @media (max-width: 767px) {
 
+    /* ====================================
+       Header
+       ==================================== */
+
+    .top-nav {
+        min-height: 60px;
+
+        padding: 8px 12px;
+
+        gap: 8px;
+    }
+
+    .brand {
+        width: 38px;
+        height: 38px;
+    }
+
+    .search-form {
+        max-width: none;
+    }
+
+    .search-form input {
+        min-height: 40px;
+
+        padding-left: 14px;
+        padding-right: 82px;
+    }
+
+    .search-form button {
+        min-height: 34px;
+
+        padding: 6px 12px;
+
+        font-size: 0.8rem;
+    }
+
+    .profile-button {
+        padding: 7px 12px;
+
+        font-size: 0.85rem;
+    }
+
+
+    /* ====================================
+       Page Heading
+       ==================================== */
+
+    .page-heading {
+        min-height: 56px;
+
+        padding: 0 12px;
+    }
+
+    .page-heading h1 {
+        font-size: 1.1rem;
+    }
+
+
+    /* ====================================
+       Tweet Card
+       ==================================== */
+
+    .tweet-detail {
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+
+        box-shadow: none;
+    }
+
+    .tweet-header {
+        padding: 16px;
+    }
+
+    .tweet-body {
+        padding: 16px;
+    }
+
+    .tweet-text {
+        margin-top: 16px;
+
+        font-size: 1.08rem;
+        line-height: 1.5;
+    }
+
+    .tweet-media {
+        margin-top: 16px;
+
+        border-radius: 14px;
+    }
+
+
+    /* ====================================
+       Tweet Actions
+       ==================================== */
+
     .tweet-actions {
         grid-template-columns: repeat(5, minmax(0, 1fr));
+
         gap: 2px;
-        padding: 10px 8px;
+
+        padding: 8px;
     }
 
     .action-button {
-        min-height: 44px;
+        min-height: 42px;
+
         padding: 8px 4px;
-        font-size: 0.875rem;
-        white-space: nowrap;
+
+        font-size: 0.78rem;
+    }
+
+
+    /* ====================================
+       Statistics
+       ==================================== */
+
+    .tweet-stats {
+        gap: 16px;
+
+        padding: 13px 16px;
+    }
+
+
+    /* ====================================
+       Reply Composer
+       ==================================== */
+
+    .reply-composer {
+        padding: 16px;
+    }
+
+    .reply-composer-inner {
+        gap: 10px;
+    }
+
+    .reply-form textarea {
+        min-height: 76px;
+    }
+
+
+    /* ====================================
+       Replies
+       ==================================== */
+
+    .section-heading {
+        padding: 15px 16px;
+    }
+
+    .reply-item {
+        gap: 10px;
+
+        padding: 16px;
+    }
+
+    .reply-actions {
+        gap: 6px;
+    }
+
+
+    /* ====================================
+       Feed
+       ==================================== */
+
+    .feed-section {
+        border-radius: 0;
+
+        border-left: 0;
+        border-right: 0;
+
+        box-shadow: none;
+    }
+
+    .feed-card {
+        padding: 16px;
+    }
+
+
+    /* ====================================
+       Notification
+       ==================================== */
+
+    .notification-region {
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
     }
 }
+
+
+/* ========================================
+   Small Mobile: below 480px
+   ======================================== */
+
+@media (max-width: 479px) {
+
+    .top-nav {
+        gap: 6px;
+    }
+
+    .brand {
+        width: 34px;
+        height: 34px;
+
+        font-size: 1.2rem;
+    }
+
+    .profile-button {
+        padding: 7px 10px;
+
+        font-size: 0.8rem;
+    }
+
+    .search-form button {
+        padding: 6px 10px;
+    }
+
+    .tweet-header {
+        padding: 14px;
+    }
+
+    .tweet-body {
+        padding: 14px;
+    }
+
+    .author-avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .tweet-text {
+        font-size: 1.02rem;
+    }
+
+    .tweet-actions {
+        padding: 6px;
+    }
+
+    .action-button {
+        min-height: 40px;
+
+        font-size: 0.72rem;
+    }
+
+    .reply-item {
+        padding: 14px;
+    }
+
+    .reply-avatar {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+
 /* ========================================
    Reduced Motion Accessibility
    ======================================== */
@@ -260,5 +527,14 @@
 
     html {
         scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
     }
 }
