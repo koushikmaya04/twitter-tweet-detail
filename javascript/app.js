@@ -7,13 +7,6 @@ import "./images/image-queue.js";
 
 
 // ========================================
-// Debounced Search
-// ========================================
-
-import { renderPosts } from "./ui/render.js";
-
-
-// ========================================
 // Feed Storage
 // ========================================
 
@@ -21,8 +14,98 @@ if (!window.feedPosts) {
     window.feedPosts = [];
 }
 
-const debouncedSearch = debounce(handleSearch, 500);
 
-searchInput.addEventListener("input", (event) => {
-    debouncedSearch(event.target.value);
-});
+// ========================================
+// Search Elements
+// ========================================
+
+const searchInput =
+    document.querySelector("#searchInput");
+
+const searchResults =
+    document.querySelector("#searchResults");
+
+
+// ========================================
+// Search Function
+// ========================================
+
+function handleSearch(query) {
+    if (!searchResults) {
+        return;
+    }
+
+    const searchTerm =
+        query.trim().toLowerCase();
+
+    if (!searchTerm) {
+        searchResults.innerHTML = "";
+        return;
+    }
+
+    const results =
+        window.feedPosts.filter((post) => {
+            const content =
+                String(post.content || "")
+                    .toLowerCase();
+
+            const author =
+                String(post.author || "")
+                    .toLowerCase();
+
+            return (
+                content.includes(searchTerm) ||
+                author.includes(searchTerm)
+            );
+        });
+
+    searchResults.innerHTML = "";
+
+    if (results.length === 0) {
+        searchResults.textContent =
+            "No posts found.";
+
+        return;
+    }
+
+    results.forEach((post) => {
+        const result =
+            document.createElement("div");
+
+        result.className =
+            "search-result";
+
+        result.textContent =
+            `${post.author}: ${post.content}`;
+
+        searchResults.appendChild(result);
+    });
+}
+
+
+// ========================================
+// Debounced Search
+// ========================================
+
+const debouncedSearch =
+    debounce(handleSearch, 500);
+
+if (searchInput) {
+    searchInput.addEventListener(
+        "input",
+        (event) => {
+            debouncedSearch(
+                event.target.value
+            );
+        }
+    );
+}
+
+
+// ========================================
+// App Loaded
+// ========================================
+
+console.log(
+    "App loaded successfully"
+);

@@ -222,22 +222,23 @@
     border: 0;
     border-radius: 999px;
 
-    background: #1d9bf0;
+    background: #0f1419;
     color: #ffffff;
 
     font-size: 1rem;
     font-weight: 700;
 
-    box-shadow: 0 6px 18px rgba(29, 155, 240, 0.18);
+    box-shadow: 0 6px 18px rgba(15, 20, 25, 0.18);
 
-    transition:
-        background-color 0.18s ease,
-        box-shadow 0.18s ease,
-        transform 0.12s ease;
+    cursor: pointer;
 }
 
 .compose-button:hover {
-    background: #1a8cd8;
+    background: #272c30;
+}
+
+.compose-button:hover {
+    background: #0a8cd8;
     box-shadow: 0 8px 22px rgba(29, 155, 240, 0.24);
 }
 
@@ -497,70 +498,115 @@
 
 
 /* ========================================
-   Tweet Actions
+   Tweet Action Buttons
    ======================================== */
 
 .tweet-actions {
-    display: grid;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    width: 100%;
 
-    gap: 6px;
+    padding: 10px 24px;
 
-    padding: 10px 12px;
-
-    border-bottom: 1px solid #e6ecf0;
+    border-top: 1px solid #eff3f4;
 }
 
+
 .action-button {
-    display: inline-flex;
+    display: flex;
+
     align-items: center;
     justify-content: center;
 
-    gap: 6px;
+    width: 40px;
+    height: 40px;
 
-    width: 100%;
-    min-width: 0;
-    min-height: 42px;
+    padding: 0;
 
-    padding: 8px 10px;
-
-    border: 0;
-    border-radius: 999px;
+    border: none;
+    border-radius: 50%;
 
     background: transparent;
+
     color: #536471;
 
-    font-size: 0.9rem;
-    font-weight: 600;
-
-    white-space: nowrap;
+    cursor: pointer;
 
     transition:
-        background-color 0.18s ease,
-        color 0.18s ease,
-        transform 0.1s ease;
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
-.action-button:hover {
-    background: #f1f3f4;
-    color: #0f1419;
+
+.action-button svg {
+    width: 20px;
+    height: 20px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
-.action-button:active {
-    transform: scale(0.97);
+
+/* Reply */
+
+.reply-button:hover {
+    color: #1d9bf0;
+
+    background: rgba(29, 155, 240, 0.1);
 }
+
+
+/* Repost */
+
+.repost-button:hover {
+    color: #00ba7c;
+
+    background: rgba(0, 186, 124, 0.1);
+}
+
+
+/* Like */
+
+.like-button:hover {
+    color: #f91880;
+
+    background: rgba(249, 24, 128, 0.1);
+}
+
 
 .like-button[aria-pressed="true"] {
-    background: #fce7f3;
-    color: #e6005c;
-    font-weight: 700;
+    color: #f91880;
 }
 
-.bookmark-button[aria-pressed="true"] {
-    background: #e8f5fd;
-    color: #0b84d8;
-    font-weight: 700;
+
+.like-button[aria-pressed="true"] svg {
+    fill: currentColor;
+}
+
+
+/* Bookmark */
+
+.bookmark-button:hover {
+    color: #1d9bf0;
+
+    background: rgba(29, 155, 240, 0.1);
+}
+
+
+/* Share */
+
+.share-button:hover {
+    color: #1d9bf0;
+
+    background: rgba(29, 155, 240, 0.1);
 }
 
 
@@ -640,10 +686,12 @@
     border: 0;
     border-radius: 999px;
 
-    background: #1d9bf0;
+    background: #0f1419;
     color: #ffffff;
 
     font-weight: 700;
+
+    cursor: pointer;
 
     transition:
         background-color 0.18s ease,
@@ -651,7 +699,7 @@
 }
 
 .reply-submit-button:hover {
-    background: #1a8cd8;
+    background: #272c30;
 }
 
 .reply-submit-button:active {
@@ -1491,4 +1539,216 @@
         min-width: 0;
         padding: 6px 8px;
     }
+}
+/* ========================================
+   Dynamic Feed
+   ======================================== */
+
+.feed-card {
+    padding: 16px 20px;
+
+    border-bottom: 1px solid #e6ecf0;
+
+    background: #ffffff;
+
+    transition:
+        background-color 0.18s ease;
+}
+
+.feed-card:hover {
+    background: #f8fafb;
+}
+
+
+/* ========================================
+   Feed Author
+   ======================================== */
+
+.feed-card-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.feed-author {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+}
+
+.feed-avatar {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.feed-author-info {
+    min-width: 0;
+}
+
+.feed-author-name {
+    color: #0f1419;
+
+    font-weight: 750;
+}
+
+.feed-author-handle {
+    margin-top: 2px;
+
+    color: #536471;
+
+    font-size: 0.92rem;
+}
+
+.feed-menu-button {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #536471;
+
+    font-size: 1.2rem;
+
+    cursor: pointer;
+}
+
+.feed-menu-button:hover {
+    background: #eef1f3;
+    color: #0f1419;
+}
+
+
+/* ========================================
+   Feed Content
+   ======================================== */
+
+.feed-card-body {
+    padding-left: 50px;
+}
+
+.feed-post-content {
+    margin: 8px 0 12px;
+
+    color: #0f1419;
+
+    font-size: 1rem;
+
+    line-height: 1.5;
+}
+
+
+/* ========================================
+   Feed Image
+   ======================================== */
+
+.feed-card-media {
+    overflow: hidden;
+
+    margin-top: 12px;
+
+    border: 1px solid #dfe6eb;
+
+    border-radius: 16px;
+
+    background: #f7f9fa;
+}
+
+.feed-card-media img {
+    display: block;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+
+    border-radius: inherit;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.feed-card-media img:hover {
+    transform: scale(1.01);
+}
+
+
+/* ========================================
+   Feed Actions
+   ======================================== */
+
+.feed-card-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 520px;
+
+    margin-top: 8px;
+
+    margin-left: 42px;
+}
+
+.feed-action-button {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    min-width: 55px;
+    min-height: 36px;
+
+    padding: 6px 8px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: transparent;
+
+    color: #536471;
+
+    font-size: 0.85rem;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.18s ease,
+        color 0.18s ease;
+}
+
+.feed-action-button svg {
+    width: 18px;
+    height: 18px;
+
+    fill: currentColor;
+}
+
+.feed-action-button:hover {
+    background: #eef1f3;
+    color: #1d9bf0;
+}
+
+.feed-action-button.like-action:hover {
+    color: #e0245e;
 }

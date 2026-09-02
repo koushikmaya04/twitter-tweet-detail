@@ -313,64 +313,108 @@
                     <!-- ====================
                          Tweet Actions
                          ==================== -->
-                    <div
-                        class="tweet-actions"
-                        aria-label="Post actions"
-                    >
-
-                        <button
-    type="button"
-    class="action-button reply-button"
-    data-action="reply"
-    data-post-id="1"
-    aria-label="Reply"
+                  <div
+    class="tweet-actions"
+    aria-label="Post actions"
 >
-    💬
-</button>
 
-<button
-    type="button"
-    class="action-button repost-button"
-    data-action="repost"
-    data-post-id="1"
-    aria-label="Repost"
->
-    🔁
-</button>
+    <!-- Reply -->
+    <button
+        type="button"
+        class="action-button reply-button"
+        data-action="reply"
+        data-post-id="1"
+        aria-label="Reply"
+    >
+        <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+        >
+            <path
+                d="M1.751 10c0-4.556 3.69-8.25 8.25-8.25h4c4.556 0 8.25 3.694 8.25 8.25s-3.694 8.25-8.25 8.25H8.75L4 21.25v-3.5A8.23 8.23 0 0 1 1.751 10Zm8.25-6.25a6.25 6.25 0 1 0 0 12.5h5.5c3.452 0 6.25-2.798 6.25-6.25S18.953 3.75 15.5 3.75h-5.5Z"
+            />
+        </svg>
+    </button>
 
-<button
-    type="button"
-    class="action-button like-button"
-    data-action="like"
-    data-post-id="1"
-    aria-pressed="false"
-    aria-label="Like"
->
-    ❤️
-</button>
 
-<button
-    type="button"
-    class="action-button bookmark-button"
-    data-action="bookmark"
-    data-post-id="1"
-    aria-pressed="false"
-    aria-label="Bookmark"
->
-    🔖
-</button>
+    <!-- Repost -->
+    <button
+        type="button"
+        class="action-button repost-button"
+        data-action="repost"
+        data-post-id="1"
+        aria-label="Repost"
+    >
+        <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+        >
+            <path
+                d="M4.5 3.75A3.75 3.75 0 0 0 .75 7.5v7.75A3.75 3.75 0 0 0 4.5 19h9.75v-2H4.5a1.75 1.75 0 0 1-1.75-1.75V7.5A1.75 1.75 0 0 1 4.5 5.75h9.586l-2.293 2.293 1.414 1.414L18 4.664 13.207-.129l-1.414 1.414 2.293 2.293H4.5Zm15 1.25h-1.75v2h1.75a1.75 1.75 0 0 1 1.75 1.75v7.75a1.75 1.75 0 0 1-1.75 1.75h-9.586l2.293-2.293-1.414-1.414L6 19.336l4.793 4.793 1.414-1.414-2.293-2.293H19.5a3.75 3.75 0 0 0 3.75-3.75V8.75A3.75 3.75 0 0 0 19.5 5Z"
+            />
+        </svg>
+    </button>
 
-<button
-    type="button"
-    class="action-button share-button"
-    data-action="share"
-    data-post-id="1"
-    aria-label="Share"
->
-    📤
-</button>
 
-                    </div>
+    <!-- Like -->
+    <button
+        type="button"
+        class="action-button like-button"
+        data-action="like"
+        data-post-id="1"
+        aria-pressed="false"
+        aria-label="Like"
+    >
+        <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+        >
+            <path
+                d="M20.884 13.19c-1.14 1.12-5.84 5.36-8.06 7.36a1.18 1.18 0 0 1-1.62 0c-2.22-2-6.92-6.24-8.06-7.36C.93 11.02 1.13 6.88 3.85 4.52a5.43 5.43 0 0 1 7.15.26l1 1 1-1a5.43 5.43 0 0 1 7.15-.26c2.72 2.36 2.92 6.5.73 8.67z"
+            />
+        </svg>
+    </button>
+
+
+    <!-- Bookmark -->
+    <button
+        type="button"
+        class="action-button bookmark-button"
+        data-action="bookmark"
+        data-post-id="1"
+        aria-pressed="false"
+        aria-label="Bookmark"
+    >
+        <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+        >
+            <path
+                d="M4 3.5C4 2.67 4.67 2 5.5 2h13c.83 0 1.5.67 1.5 1.5v19l-8-4.5-8 4.5v-19ZM6 4v15.09l6-3.375 6 3.375V4H6Z"
+            />
+        </svg>
+    </button>
+
+
+    <!-- Share -->
+    <button
+        type="button"
+        class="action-button share-button"
+        data-action="share"
+        data-post-id="1"
+        aria-label="Share"
+    >
+        <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+        >
+            <path
+                d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A3 3 0 1 0 15 5c0 .24.04.47.09.7L8.04 9.81A3 3 0 1 0 9 15c0-.24-.04-.47-.09-.7l7.12 4.16c.52.46 1.2.74 1.97.74a3 3 0 1 0 0-3.92Z"
+            />
+        </svg>
+    </button>
+
+</div>
 
 
                     <!-- ====================

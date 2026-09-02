@@ -3,6 +3,7 @@ import { sortByRecency, dedupe } from "./pipeline.js";
 import { Tweet } from "../models/post.js";
 import { observeLazyImages } from "../images/image-queue.js";
 
+
 /* ========================================
    DOM Elements
    ======================================== */
@@ -12,6 +13,7 @@ const feedLoading = document.querySelector("#feed-loading");
 const feedError = document.querySelector("#feed-error");
 const feedRetry = document.querySelector("#feed-retry");
 const feedSentinel = document.querySelector("#feed-sentinel");
+
 
 if (!feedList || !feedSentinel) {
     console.warn(
@@ -34,8 +36,31 @@ if (!feedList || !feedSentinel) {
     let isLoading = false;
     let hasMorePosts = true;
 
+    let users = [];
+
+
     /* ========================================
-       JSONPlaceholder Photos API
+       Fetch Users
+       ======================================== */
+
+    async function fetchUsers() {
+
+        const response = await fetch(
+            "https://jsonplaceholder.typicode.com/users"
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                `Users API error: ${response.status}`
+            );
+        }
+
+        return response.json();
+    }
+
+
+    /* ========================================
+       Fetch Posts
        ======================================== */
 
     async function fetchPosts(page) {
@@ -47,57 +72,94 @@ if (!feedList || !feedSentinel) {
             `https://jsonplaceholder.typicode.com/photos` +
             `?_start=${start}&_limit=${postsPerPage}`;
 
-        const response = await fetch(apiUrl);
+        const response =
+            await fetch(apiUrl);
 
         if (!response.ok) {
             throw new Error(
-                `HTTP error: ${response.status}`
+                `Posts API error: ${response.status}`
             );
         }
 
         return response.json();
     }
 
+
     /* ========================================
-       Convert Photo API → Tweet Model
+       Convert API Data → Tweet Models
        ======================================== */
 
     function createTweetModels(photos) {
 
-        return photos.map((photo) => {
+        return photos.map((photo, index) => {
 
-            const tweet = new Tweet(
-                photo.id,
-                `User ${photo.albumId}`,
-                photo.title,
-                0
-            );
+            /*
+             * Give every post a real different user.
+             *
+             * We use the Users API instead of
+             * photo.albumId because the first many
+             * photos have albumId = 1.
+             */
+            const userIndex =
+                ((photo.id - 1) % users.length);
+
+            const user =
+                users[userIndex];
+
+
+            const tweet =
+                new Tweet(
+                    photo.id,
+                    user.name,
+                    photo.title,
+                    0
+                );
+
+
+            /* ========================================
+               User Information
+               ======================================== */
 
             tweet.handle =
-                `@user${photo.albumId}`;
+                `@${user.username.toLowerCase()}`;
 
-            /*
-             * JSONPlaceholder provides thumbnailUrl.
-             * This is used instead of photo.url because
-             * the larger placeholder URL can fail.
-             */
+            tweet.avatar =
+                `https://i.pravatar.cc/100?img=${user.id}`;
+
+
+            /* ========================================
+               Image API
+               ========================================
+
+               Picsum is used as the actual image API.
+
+               Each seed is different, therefore each
+               post receives a different image.
+            */
+
             tweet.image =
-                photo.thumbnailUrl;
+                `https://picsum.photos/seed/twitter-${photo.id}/600/400`;
 
-            /*
-             * Reliable fallback image.
-             * It still uses the API photo ID so every
-             * tweet gets a different image.
-             */
+
+            /* ========================================
+               Fallback Image
+               ======================================== */
+
             tweet.fallbackImage =
-                `https://picsum.photos/id/${photo.id}/600/400`;
+                `https://picsum.photos/seed/fallback-${photo.id}/600/400`;
 
-            tweet.replies = 0;
-            tweet.reposts = 0;
+
+            tweet.replies =
+                Math.floor(Math.random() * 100);
+
+            tweet.reposts =
+                Math.floor(Math.random() * 100);
+
 
             return tweet;
         });
     }
+
 
     /* ========================================
        Loading State
@@ -115,6 +177,7 @@ if (!feedList || !feedSentinel) {
         );
     }
 
+
     function hideLoading() {
 
         if (feedLoading) {
@@ -127,6 +190,7 @@ if (!feedList || !feedSentinel) {
         );
     }
 
+
     /* ========================================
        Error State
        ======================================== */
@@ -138,12 +202,14 @@ if (!feedList || !feedSentinel) {
         }
     }
 
+
     function hideError() {
 
         if (feedError) {
             feedError.hidden = true;
         }
     }
+
 
     /* ========================================
        Load Next Page
@@ -152,12 +218,12 @@ if (!feedList || !feedSentinel) {
     async function loadNextPage() {
 
         /*
-         * Prevent duplicate requests.
-         *
-         * This is important because IntersectionObserver
-         * can fire more than once.
+         * Prevent duplicate API requests.
          */
-        if (isLoading || !hasMorePosts) {
+        if (
+            isLoading ||
+            !hasMorePosts
+        ) {
             return;
         }
 
@@ -166,14 +232,36 @@ if (!feedList || !feedSentinel) {
         hideError();
         showLoading();
 
+
         try {
 
             console.log(
                 `[Infinite Scroll] Loading page ${currentPage}`
             );
 
+
+            /* ========================================
+               Load Users Once
+               ======================================== */
+
+            if (users.length === 0) {
+
+                users =
+                    await fetchUsers();
+
+                console.log(
+                    `[Users API] Loaded ${users.length} users`
+                );
+            }
+
+
+            /* ========================================
+               Load Posts
+               ======================================== */
+
             const photos =
                 await fetchPosts(currentPage);
+
 
             if (photos.length === 0) {
 
@@ -186,12 +274,14 @@ if (!feedList || !feedSentinel) {
                 return;
             }
 
+
             /* ========================================
                API → Tweet Models
                ======================================== */
 
             const tweetPosts =
                 createTweetModels(photos);
+
 
             /* ========================================
                Functional Pipeline
@@ -202,8 +292,9 @@ if (!feedList || !feedSentinel) {
                     sortByRecency(tweetPosts)
                 );
 
+
             /* ========================================
-               Global Feed State
+               Global Feed
                ======================================== */
 
             window.feedPosts =
@@ -211,6 +302,7 @@ if (!feedList || !feedSentinel) {
                     ...window.feedPosts,
                     ...processedPosts
                 ]);
+
 
             /* ========================================
                Render
@@ -221,17 +313,24 @@ if (!feedList || !feedSentinel) {
                 feedList
             );
 
+
             /* ========================================
-               Start Lazy Image Observation
+               Lazy Image Queue
                ======================================== */
 
-            observeLazyImages(feedList);
+            observeLazyImages(
+                feedList
+            );
+
 
             /* ========================================
                Pagination
                ======================================== */
 
-            if (photos.length < postsPerPage) {
+            if (
+                photos.length <
+                postsPerPage
+            ) {
 
                 hasMorePosts = false;
 
@@ -242,8 +341,8 @@ if (!feedList || !feedSentinel) {
             } else {
 
                 currentPage++;
-
             }
+
 
         } catch (error) {
 
@@ -262,27 +361,17 @@ if (!feedList || !feedSentinel) {
         }
     }
 
+
     /* ========================================
        Infinite Scroll Observer
-       ========================================
-
-       root:
-       null = browser viewport
-
-       rootMargin:
-       200px = start loading before sentinel
-       actually reaches the viewport
-
-       threshold:
-       0 = trigger when sentinel enters
-       the observation area
        ======================================== */
 
     const observer =
         new IntersectionObserver(
             (entries) => {
 
-                const entry = entries[0];
+                const entry =
+                    entries[0];
 
                 if (
                     entry &&
@@ -293,11 +382,25 @@ if (!feedList || !feedSentinel) {
                 }
             },
             {
+                /*
+                 * Browser viewport.
+                 */
                 root: null,
+
+                /*
+                 * Start loading 200px
+                 * before sentinel.
+                 */
                 rootMargin: "200px",
+
+                /*
+                 * Trigger as soon as
+                 * sentinel enters.
+                 */
                 threshold: 0
             }
         );
+
 
     /* ========================================
        Retry
@@ -311,11 +414,14 @@ if (!feedList || !feedSentinel) {
         );
     }
 
+
     /* ========================================
        Start
        ======================================== */
 
-    observer.observe(feedSentinel);
+    observer.observe(
+        feedSentinel
+    );
 
     loadNextPage();
 }
