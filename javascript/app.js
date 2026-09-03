@@ -23,7 +23,7 @@ const searchInput =
     document.querySelector("#search-input");
 
 const searchResults =
-    document.querySelector("#searchResults");
+    document.querySelector("#search-results");
 
 
 // ========================================
