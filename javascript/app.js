@@ -31,6 +31,7 @@ const searchResults =
 // ========================================
 
 function handleSearch(query) {
+     console.log("🔎 SEARCH EXECUTED:", query);
     if (!searchResults) {
         return;
     }
