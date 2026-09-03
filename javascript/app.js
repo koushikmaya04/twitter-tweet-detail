@@ -20,7 +20,7 @@ if (!window.feedPosts) {
 // ========================================
 
 const searchInput =
-    document.querySelector("#searchInput");
+    document.querySelector("#search-input");
 
 const searchResults =
     document.querySelector("#searchResults");
